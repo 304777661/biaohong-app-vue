@@ -7,13 +7,14 @@ import router from '../../../router'
 // Vue.use(MintUI);
 
 Vue.use(VueAxios, axios)
-// const testApi = 'Biaohong/';
-const apiRoot = 'http://192.168.10.237:8080/Biaohong/';
+    // const testApi = 'Biaohong/';
+const apiRoot = 'http://192.168.10.68:8080/Biaohong/';
 // const apiRoot = 'http://app.bh8341.com/';
 let ajaxNumber = 1;
 // let _this = this;
 let Vm = new Vue();
 export default {
+    apiRoot,
     postData(url, success, error, dataParam = {}, thisObj = null) {
         axios({
                 url: apiRoot + url,
@@ -27,7 +28,7 @@ export default {
             .then((response) => {
                 console.log(response.data, ajaxNumber++);
                 if (response.data.resultCode == 0) {
-                    success(response.data);
+                    success(response.data.resultData);
                 }
                 if (response.data.resCode == "301") {
                     console.log("token不正确");
@@ -47,7 +48,7 @@ export default {
                 if (response.data.resultCode == 0) {
                     success(response.data);
                 } else {
-                  error(response.data);
+                    error(response.data);
                 }
 
             })

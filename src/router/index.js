@@ -24,15 +24,16 @@ export default new Router({
         ///////////////////////////////////////////////
         /////////////// index  s-- ////////////////////
         {
-            path: '/',
-            name: '/',
-            component: Index
-        },
-        {
             path: '/login',
             name: 'Login',
             component: Login
         },
+        {
+            path: '/',
+            name: '/',
+            component: Index
+        },
+
         /////////////// ReserveSite  s-- ///////////////////////
         {
             path: '/ReserveSite',

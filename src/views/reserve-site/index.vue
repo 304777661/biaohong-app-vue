@@ -19,16 +19,17 @@
       </li>
     </ul>
     <ul class="reserve-list">
-      <li>
+      <li v-for="(item,index) of resultList" :key="index">
         <div>
-          <img src="../../../static/reserve-list-img.png" alt>
+          <!-- <img src="../../../static/reserve-list-img.png" alt> -->
+          <img :src="myAjax.apiRoot+item.pic" alt>
         </div>
         <div>
-          岳麓汽车体验馆
-          <button class="pull-right" @click="reserveDetail">立即预约</button>
+          {{item.shopName}}
+          <button class="pull-right" @click="reserveDetail(item.shopId)">立即预约</button>
         </div>
         <div>
-          <i class="iconfont iconweizhi"></i>岳麓区，距我16.1km
+          <i class="iconfont iconweizhi"></i>距离暂无
           <i class="iconfont iconxingxing pull-right"></i>
         </div>
       </li>
@@ -47,6 +48,7 @@ export default {
   },
   data() {
     return {
+      
       resultList: [],
       tabSwitch: 1,
       popupVisible: false,
@@ -67,7 +69,14 @@ export default {
       ]
     };
   },
-  created() {},
+  created() {
+    this.myAjax.postData('index/loadBaseList',
+        (result)=>{
+            this.resultList = result.list;
+            console.log(result.list,80);
+        },()=>{
+        },{AreaID:""});
+  },
   mounted() {},
   methods: {
     address() {
@@ -81,8 +90,8 @@ export default {
       // this.popupVisible = false;
       // this.$messagebox.alert(values);
     },
-    reserveDetail() {
-      this.$router.push("/ReserveDetail");
+    reserveDetail(arg) {
+      this.$router.push(`/ReserveDetail?baseId=${arg}`);
     },
     notOpen() {
       this.$messagebox.alert("敬请期待", "暂未开放");

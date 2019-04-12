@@ -2,8 +2,7 @@
   <div id="reserveDetail">
     <div
       class="top"
-      style="background: url('../../../static/reserve-detail-img.png') no-repeat center
-      center"
+      :style="reserveBgImg"
     >
       <span class="black-btn" @click="blackBtn">
         <img src="../../../static/header-back-icon-1.png" alt>
@@ -12,7 +11,7 @@
     </div>
     <div class="guang-name">
       <p>
-        岳麓汽车体验馆
+        {{resultList.shopName}}
         <span class="pull-right" style="color: #fa3338;">4.0分</span>
       </p>
       <p class="vipprice">
@@ -113,6 +112,11 @@
 export default {
   data() {
     return {
+      resultList: {},
+      addressbg: '',
+      reserveBgImg:{
+        background:"url('"+this.addressbg+"') no-repeat center center"
+      },
       startDateVal: "",
       startDate: new Date(),
       btnDefauleStart:
@@ -169,6 +173,16 @@ export default {
       // this.$messagebox.alert(values);
     },
     submit() {}
+  },
+  created(){
+    this.myAjax.postData('index/getBaseData',
+        (result)=>{
+            this.resultList = result;
+            console.log(this.resultList,56);
+            this.reserveBgImg = "background: url('"+this.myAjax.apiRoot+this.resultList.pic+"') no-repeat center center"
+            console.log(result.list,80);
+        },()=>{
+        },{baseId:this.$route.query.baseId});
   }
 };
 </script>

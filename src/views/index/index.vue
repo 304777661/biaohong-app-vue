@@ -202,7 +202,17 @@ export default {
       }
     };
   },
-  created() {},
+  created() {
+    if(!localStorage.token){
+      this.$router.push("/login");
+    }else {
+      this.myAjax.postData('newslist/queryNewslist',
+        (result)=>{
+            this.result = result;
+        },()=>{
+        },{TypeID:"1"});
+    }
+  },
   mounted() {},
   methods: {
     notOpen() {

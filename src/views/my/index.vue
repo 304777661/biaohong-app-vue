@@ -58,25 +58,25 @@
     <ul style="margin: 16px 0 24px 0;">
       <router-link tag="a" to="/my-serve" class="many-nav">
         <img src="../../../static/mycenter-icon-1.png" alt>
-        <span>我的预约</span>
+        <span>派送</span>
         <img src="../../../static/rg-arrow.png" alt>
         <div class="line"></div>
       </router-link>
       <router-link tag="a" to="/my-pre-borrow" class="many-nav">
         <img src="../../../static/mycenter-icon-2.png" alt>
-        <span>我的预借</span>
+        <span>加权分红</span>
         <img src="../../../static/rg-arrow.png" alt>
         <div class="line"></div>
       </router-link>
       <router-link tag="a" to="/my-collect" class="many-nav">
         <img src="../../../static/mycenter-icon-3.png" alt>
-        <span>我的收藏</span>
+        <span>系统消息</span>
         <img src="../../../static/rg-arrow.png" alt>
         <div class="line"></div>
       </router-link>
       <a @click="notOpen" class="many-nav">
         <img src="../../../static/mycenter-icon-4.png" alt>
-        <span>读书笔记</span>
+        <span>联系官方</span>
         <img src="../../../static/rg-arrow.png" alt>
         <div class="line"></div>
       </a>
