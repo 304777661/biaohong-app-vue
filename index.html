@@ -5,31 +5,30 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <title>骉族</title>
-    <!-- <link rel="stylesheet" href="node_modules/mint-ui/lib/style.css"> -->
     <script type="text/javascript">
-      var aliChannel=null;
-      var wxChannel=null;
-      if(window.plus){
-        plusReady();
-      }else{
-        document.addEventListener( "plusready", plusReady, false );
-      }
-      function plusReady(){
-        plus.payment.getChannels(function(channels){
-          for(var i=0;i<channels.length;i++){
-            if(channels[i].id == 'alipay'){
-              console.log("aliChannel赋值中..."+channels[i].id);
-              aliChannel=channels[i];
-            }
-            else if(channels[i].id == 'wxpay'){
-              console.log("wxChannel赋值中..."+channels[i].id);
-              wxChannel=channels[i];
-            }
-          }
-        },function(e){
-          alert("获取支付通道失败："+e.message);
-        });
-      }
+        var aliChannel = null;
+        var wxChannel = null;
+        if (window.plus) {
+            plusReady();
+        } else {
+            document.addEventListener("plusready", plusReady, false);
+        }
+
+        function plusReady() {
+            plus.payment.getChannels(function(channels) {
+                for (var i = 0; i < channels.length; i++) {
+                    if (channels[i].id == 'alipay') {
+                        console.log("aliChannel赋值中..." + channels[i].id);
+                        aliChannel = channels[i];
+                    } else if (channels[i].id == 'wxpay') {
+                        console.log("wxChannel赋值中..." + channels[i].id);
+                        wxChannel = channels[i];
+                    }
+                }
+            }, function(e) {
+                // alert("获取支付通道失败：" + e.message);
+            });
+        }
     </script>
 </head>
 

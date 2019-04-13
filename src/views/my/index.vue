@@ -7,34 +7,35 @@
     ></headerpage>
     <div
       class="avater"
-      style="background: url('../../../static/geren-header-bg.png') center no-repeat;background-size: 100% 100%;"
+      style=""
     >
       <div class="avater-min">
         <div>
           <img src="../../../static/oneself-header.png" alt>
         </div>
         <div>
-          <p>柠檬木有枝</p>
-          <p>ID：12352168</p>
+          <p>{{result.userName||"暂无"}}</p>
+          <p>ID：{{result.userId}}</p>
         </div>
       </div>
       <div class="level-star">
-        <p>1星</p>
-        <p>体验官</p>
+        <p>{{result.uplevel}}星</p>
+        <p v-show="result.uplevel==0">普通会员</p>
+        <p v-show="result.uplevel==1">VIP会员</p>
+        <p v-show="result.uplevel==2">一星会员</p>
+        <p v-show="result.uplevel==3">二星会员</p>
+        <p v-show="result.uplevel==4">三星会员</p>
+        <p v-show="result.uplevel==5">四星会员</p>
+        <p v-show="result.uplevel==6">五星会员</p>
+        <p v-show="result.uplevel==100">创始会员</p>
       </div>
     </div>
     <div class="geren-type">
-      <div>
-        <span>300元</span>
-        <p>成为体验官</p>
-      </div>
-      <div>
-        <span>1000元</span>
-        <p>成为体验官</p>
-      </div>
-      <div>
-        <span>300元</span>
-        <p>成为体验官</p>
+      <div v-for="(item, index) of vipCardList" :key="index" :data-id="item.cardNo" @click="pickerBuyType(item)">
+        <span>{{item.price/100}}元</span>
+        <p v-show="item.cardType==1">体验官</p>
+        <p v-show="item.cardType==2">修路人</p>
+        <p v-show="item.cardType==3">引航员</p>
       </div>
     </div>
     <div class="book-nav">
@@ -83,6 +84,10 @@
     </ul>
     <div class="exit" @click="exitLogin" style="margin: 24px 0;">退出登录</div>
     <footernav :imgActive="imgActive=5"></footernav>
+
+    <mt-popup value-key="index" v-model="popupVisible" position="bottom" popup-transition="popup-fade">
+      <mt-picker valueKey="name" :data-levelren="levelren" :slots="slots" @change="onValuesChange"></mt-picker>
+    </mt-popup>
   </div>
 </template>
 
@@ -96,7 +101,26 @@ export default {
   },
   data() {
     return {
-      result: ""
+      avaterbgUrl: require("../../../static/geren-header-bg.png"),
+      result: "",
+      vipCardList: "",
+      popupVisible: false,
+      levelren: 0,
+      slots: [
+        {
+          flex: 1,
+          defaultIndex: 2,
+          // values: ["余额支付", "微信支付", "取消"],
+          values: [
+            { id: "1", name: "余额支付" },
+            { id: "2", name: "微信支付" },
+            { id: "0", name: "取消" }
+          ],
+
+          className: "picker-content",
+          textAlign: "center"
+        }
+      ]
     };
   },
   methods: {
@@ -107,16 +131,82 @@ export default {
     exitLogin() {
       localStorage.token = "";
       this.$router.push("/login");
+    },
+    pickerBuyType(arg) {
+      if (this.result.usertype >= arg.cardType) {
+        this.$messagebox.alert("您已是该级别");
+      } else {
+        this.levelren = arg.cardType - 1;
+        this.popupVisible = true;
+      }
+    },
+    onValuesChange(picker, values) {
+      this.popupVisible = false;
+      if (values[0].id == 1) {
+        let index = picker.$el.dataset.levelren;
+        this.overBuy(this.vipCardList[index]);
+      }
+      if (values[0].id == 2) {
+        let index = picker.$el.dataset.levelren;
+        this.wechatBuy(this.vipCardList[index]);
+      }
+      // this.$messagebox.alert(values);
+    },
+    overBuy() {},
+    wechatBuy(arg) {
+      this.myAjax.postData(
+        "settle/weixinPay",
+        result => {
+          this.result = result;
+          console.log("发送支付的值：" + JSON.stringify(result));
+          console.log("发送支付类型：", wxChannel);
+          plus.payment.request(
+            wxChannel,
+            {
+              appid: result.appId,
+              noncestr: result.nonceStr,
+              package: result.package,
+              partnerid: result.partnerid,
+              prepayid: result.prepayId,
+              timestamp: +result.timeStamp,
+              sign: result.paySign
+            },
+            () => {
+              alert("支付成功");
+            },
+            error => {
+              alert("支付失败:" + JSON.stringify(error));
+            }
+          );
+        },
+        () => {},
+        {
+          fee: 0.01 * arg.price,
+          token: localStorage.token,
+          cardId: arg.id,
+          body: "标题1",
+          subject: "标题2"
+        },
+        this
+      );
     }
   },
   created() {
     this.myAjax.postData(
-      "wode/personal_data",
+      "center/getUserMsg",
       result => {
         this.result = result;
       },
       () => {},
-      { mm: this.passWord }
+      {}
+    );
+    this.myAjax.postData(
+      "card/queryCardList",
+      result => {
+        this.vipCardList = result;
+      },
+      () => {},
+      {}
     );
   }
 };
@@ -128,6 +218,8 @@ div.my-center {
   background-color: #fff;
   .avater {
     display: flex;
+    background: url("../../../static/geren-header-bg.png") center no-repeat;
+    background-size: 100% 100%;
     align-items: center;
     justify-content: space-between;
     height: 260px;

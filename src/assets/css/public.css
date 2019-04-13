@@ -796,4 +796,8 @@ ul.tab-container-line > li.active {
   background-color: #e60012;
 }
 
+div.picker-content {
+  width: 100vw;
+}
+
 /* 自定义  e-- */

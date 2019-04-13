@@ -31,6 +31,10 @@
         <div>
           <i class="iconfont iconweizhi"></i>距离暂无
           <i class="iconfont iconxingxing pull-right"></i>
+          <i class="iconfont iconxingxing1 pull-right"></i>
+          <i class="iconfont iconxingxing1 pull-right"></i>
+          <i class="iconfont iconxingxing1 pull-right"></i>
+          <i class="iconfont iconxingxing1 pull-right"></i>
         </div>
       </li>
     </ul>
@@ -48,7 +52,6 @@ export default {
   },
   data() {
     return {
-      
       resultList: [],
       tabSwitch: 1,
       popupVisible: false,
@@ -70,12 +73,15 @@ export default {
     };
   },
   created() {
-    this.myAjax.postData('index/loadBaseList',
-        (result)=>{
-            this.resultList = result.list;
-            console.log(result.list,80);
-        },()=>{
-        },{AreaID:""});
+    this.myAjax.postData(
+      "index/loadBaseList",
+      result => {
+        this.resultList = result.list;
+        console.log(result.list, 80);
+      },
+      () => {},
+      { AreaID: "" }
+    );
   },
   mounted() {},
   methods: {
@@ -144,7 +150,8 @@ export default {
         i.iconweizhi {
           color: #fa3338;
         }
-        i.iconxingxing {
+        i.iconxingxing,
+        i.iconxingxing1 {
           color: #fa3338;
         }
       }

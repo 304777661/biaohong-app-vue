@@ -26,7 +26,7 @@
         <i class="iconfont iconxiaoxilaba"></i> 骉轟科技将在2019-03-29召开2019新品发布会！
       </div>
       <p class="title-text">
-        <i class="iconfont iconshuxian"></i>明星恭贺
+        <i class="iconfont iconshuxian"></i>{{resultList.news_title}}
       </p>
       <video-player
         class="video-player vjs-custom-skin self-video"
@@ -37,7 +37,7 @@
         @pause="onPlayerPause($event)"
       ></video-player>
       <div class="fenxiang">
-        【骉轟科技】湖南卫视各大明星齐上阵
+        【{{resultList.author}}{{resultList.describe}}
         <i class="iconfont iconfenxiang pull-right"></i>
       </div>
     </div>
@@ -166,7 +166,8 @@ export default {
   data() {
     return {
       isNowPage: true,
-      resultList: [],
+      videoSrc: "",
+      resultList: {},
       tabSwitch: 1,
       indexNavImg: {
         indexNav_0: require("../../../static/index-nav-0.png"),
@@ -186,8 +187,10 @@ export default {
         fluid: true, // 当true时，Video.js player将拥有流体大小。换句话说，它将按比例缩放以适应其容器。
         sources: [
           {
-            type: "video/mp4",
-            src: "http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4" //你的视频地址（必填）
+            src: this.videoSrc,
+            // src:
+            //   "http://192.168.10.68:8088/BiaohongAdmin/upload/news/1904/x21RC0CUKK.mp4",
+            type: "video/mp4"
           }
         ],
         poster: "poster.jpg", //你的封面地址
@@ -202,18 +205,28 @@ export default {
       }
     };
   },
-  created() {
-    if(!localStorage.token){
-      this.$router.push("/login");
-    }else {
-      this.myAjax.postData('newslist/queryNewslist',
-        (result)=>{
-            this.result = result;
-        },()=>{
-        },{TypeID:"1"});
+  computed: {
+    player() {
+      return this.$refs.videoPlayer.player;
     }
   },
-  mounted() {},
+  created() {
+    if (!localStorage.token) {
+      this.$router.push("/login");
+    } else {
+    }
+  },
+  mounted() {
+    this.myAjax.postData(
+      "newslist/queryNewslist",
+      result => {
+        this.resultList = result[0];
+        this.player.tag.src = result[0].mediaUrl;
+      },
+      () => {},
+      { TypeID: "1" }
+    );
+  },
   methods: {
     notOpen() {
       this.$messagebox.alert("敬请期待", "暂未开放");

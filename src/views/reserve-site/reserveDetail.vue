@@ -19,7 +19,11 @@
         <span class="danwei">马力/人</span>
         &nbsp;&nbsp;
         <mt-badge type="warning" size="large">会员价 50</mt-badge>
-        <i class="iconfont iconxingxing1 pull-right"></i>
+        <i class="iconfont iconxingxing pull-right"></i>
+          <i class="iconfont iconxingxing1 pull-right"></i>
+          <i class="iconfont iconxingxing1 pull-right"></i>
+          <i class="iconfont iconxingxing1 pull-right"></i>
+          <i class="iconfont iconxingxing1 pull-right"></i>
       </p>
     </div>
     <div class="my-cell" @click="otherPage">
@@ -34,13 +38,13 @@
       <p style="color: #333333">体验事项选择</p>
       <ul class="date-picker">
         <li>
-          <span>开始日期</span>
+          <span>预约日期</span>
           <button @click="openPicker">{{btnDefauleStart}}</button>
         </li>
-        <li>
+        <!-- <li>
           <span>结束日期</span>
           <button>2019-01-01</button>
-        </li>
+        </li> -->
         <li>
           <span>预约教练</span>
           <button
@@ -113,33 +117,25 @@ export default {
   data() {
     return {
       resultList: {},
-      addressbg: '',
-      reserveBgImg:{
-        background:"url('"+this.addressbg+"') no-repeat center center"
-      },
+      reserveBgImg: "",
       startDateVal: "",
       startDate: new Date(),
       btnDefauleStart:
         new Date().getFullYear() +
-        "/" +
-        (new Date().getMonth() + 1) +
-        "/" +
-        new Date().getDate(),
+        (new Date().getMonth() < 9
+          ? "0" + (new Date().getMonth() + 1)
+          : new Date().getMonth() + 1) +
+        (new Date().getDate() < 9
+          ? "0" + new Date().getDate()
+          : new Date().getDate()),
       popupVisible: false,
       maliNumber: "1",
       selected: "1",
       slots: [
         {
           flex: 1,
-          values: [
-            "2015-01",
-            "2015-02",
-            "2015-03",
-            "2015-04",
-            "2015-05",
-            "2015-06"
-          ],
-          className: "picker-address",
+          values: ["欧阳洋洋"],
+          className: "picker-content",
           textAlign: "center"
         }
       ]
@@ -159,10 +155,10 @@ export default {
       value = new Date(value);
       this.btnDefauleStart =
         value.getFullYear() +
-        "/" +
-        (value.getMonth() + 1) +
-        "/" +
-        value.getDate();
+        (value.getMonth() < 9
+          ? "0" + (value.getMonth() + 1)
+          : value.getMonth() + 1) +
+        (value.getDate() < 9 ? "0" + value.getDate() : value.getDate());
     },
     selectCoach() {
       this.popupVisible = true;
@@ -172,24 +168,44 @@ export default {
       // this.popupVisible = false;
       // this.$messagebox.alert(values);
     },
-    submit() {}
+    submit() {
+      this.myAjax.postData(
+        "index/subscribe",
+        result => {
+          this.reserve = result;
+        },
+        () => {},
+        {
+          baseId: this.$route.query.baseId,
+          subscribeDate: this.btnDefauleStart
+        },
+        this
+      );
+    }
   },
-  created(){
-    this.myAjax.postData('index/getBaseData',
-        (result)=>{
-            this.resultList = result;
-            console.log(this.resultList,56);
-            this.reserveBgImg = "background: url('"+this.myAjax.apiRoot+this.resultList.pic+"') no-repeat center center"
-            console.log(result.list,80);
-        },()=>{
-        },{baseId:this.$route.query.baseId});
+  created() {
+    this.myAjax.postData(
+      "index/getBaseData",
+      result => {
+        this.resultList = result;
+        console.log(this.resultList, 56);
+        this.reserveBgImg =
+          "background: url('" +
+          this.myAjax.apiRoot +
+          this.resultList.pic +
+          "') no-repeat center center";
+        console.log(result.list, 80);
+      },
+      () => {},
+      { baseId: this.$route.query.baseId }
+    );
   }
 };
 </script>
 <style lang="scss" scope>
 #reserveDetail {
   background-color: #f0f1f2;
-  .picker-address {
+  .picker-content {
     width: 100vw;
   }
   .guang-name {

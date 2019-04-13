@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import Login from '../views/login/login'
+import Register from '../views/login/register'
 /////////////// index ////////////////////
 import Index from '../views/index/index'
 /////////////// 预约场地 ///////////////////////
@@ -23,17 +24,22 @@ export default new Router({
     routes: [
         ///////////////////////////////////////////////
         /////////////// index  s-- ////////////////////
+
+        {
+            path: '/',
+            name: '/',
+            component: Index
+        },
         {
             path: '/login',
             name: 'Login',
             component: Login
         },
         {
-            path: '/',
-            name: '/',
-            component: Index
+            path: '/register',
+            name: 'Register',
+            component: Register
         },
-
         /////////////// ReserveSite  s-- ///////////////////////
         {
             path: '/ReserveSite',

@@ -85,7 +85,7 @@ export default {
           }, 2000);
         },
         function(result) {
-          that.$toast(result.resMsg);
+          that.$toast(result.resultMsg);
         }
       );
       return false;

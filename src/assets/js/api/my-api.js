@@ -19,6 +19,9 @@ export default {
         axios({
                 url: apiRoot + url,
                 method: 'post',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
                 params: {
                     token: localStorage.token,
                     // token: 1,
@@ -29,11 +32,16 @@ export default {
                 console.log(response.data, ajaxNumber++);
                 if (response.data.resultCode == 0) {
                     success(response.data.resultData);
-                }
-                if (response.data.resCode == "301") {
-                    console.log("token不正确");
-                    router.push({ path: "/login" });
-                    // router.push({ path: "/login" });
+                } else if (response.data.resultCode == 5) {
+                    thisObj.$toast(response.data.resultMsg);
+                } else if (response.data.resultCode == 1) {
+                    thisObj.$toast(response.data.resultMsg);
+                } else if (response.data.resultCode == 1000) {
+                    router.push({
+                        path: "/login"
+                    });
+                } else {
+                    thisObj.$toast(response.data.resultMsg);
                 }
             })
             .catch((err) => {
@@ -41,8 +49,15 @@ export default {
                 error();
             });
     },
-    noTokenPost(url, success, error, dataParam = {}, thisObj = null) {
-        axios.post(apiRoot + url, dataParam)
+    noTokenPost(url, success, error, dataParam = {}) {
+        axios({
+                url: apiRoot + url,
+                method: 'post',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                params: dataParam
+            })
             .then((response) => {
                 console.log(response.data, ajaxNumber++);
                 if (response.data.resultCode == 0) {
@@ -50,12 +65,26 @@ export default {
                 } else {
                     error(response.data);
                 }
-
             })
             .catch((err) => {
                 console.log(err);
                 error();
-            })
+            });
+
+        // axios.post(apiRoot + url, dataParam)
+        //     .then((response) => {
+        //         console.log(response.data, ajaxNumber++);
+        //         if (response.data.resultCode == 0) {
+        //             success(response.data);
+        //         } else {
+        //             error(response.data);
+        //         }
+
+        //     })
+        //     .catch((err) => {
+        //         console.log(err);
+        //         error();
+        //     })
     },
     testGet(url, success, error) {
         axios.get(testApi + url)
