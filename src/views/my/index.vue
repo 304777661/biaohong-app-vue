@@ -75,7 +75,7 @@
         <img src="../../../static/rg-arrow.png" alt>
         <div class="line"></div>
       </router-link>
-      <a @click="notOpen" class="many-nav">
+      <a @click="notOpen" class="many-nav" href="tel:10000">
         <img src="../../../static/mycenter-icon-4.png" alt>
         <span>联系官方</span>
         <img src="../../../static/rg-arrow.png" alt>
