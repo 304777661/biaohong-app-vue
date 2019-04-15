@@ -3,12 +3,9 @@
     <headerpage
       :title_page="title_page='个人中心'"
       :backBtn="backBtn=0"
-      :rgUrl="rgUrl='../../static/geren-edit.png'"
+      :rgUrl="rgUrl='./static/geren-edit.png'"
     ></headerpage>
-    <div
-      class="avater"
-      style="background: url('./static/geren-header-bg.png') center no-repeat;"
-    >
+    <div class="avater" style="background: url('./static/geren-header-bg.png') center no-repeat;">
       <div class="avater-min">
         <div>
           <img src="../../../static/oneself-header.png" alt>
@@ -31,11 +28,16 @@
       </div>
     </div>
     <div class="geren-type">
-      <div v-for="(item, index) of vipCardList" :key="index" :data-id="item.cardNo" @click="pickerBuyType(item)">
+      <div
+        v-for="(item, index) of vipCardList"
+        :key="index"
+        :data-id="item.cardNo"
+        @click="pickerBuyType(item)"
+      >
         <span>{{item.price/100}}元</span>
         <p v-show="item.cardType==1">体验官</p>
         <p v-show="item.cardType==2">修路人</p>
-        <p v-show="item.cardType==3">引航员</p>
+        <p v-show="item.cardType==3">段长</p>
       </div>
     </div>
     <div class="book-nav">
@@ -85,7 +87,12 @@
     <div class="exit" @click="exitLogin" style="margin: 24px 0;">退出登录</div>
     <footernav :imgActive="imgActive=5"></footernav>
 
-    <mt-popup value-key="index" v-model="popupVisible" position="bottom" popup-transition="popup-fade">
+    <mt-popup
+      value-key="index"
+      v-model="popupVisible"
+      position="bottom"
+      popup-transition="popup-fade"
+    >
       <mt-picker valueKey="name" :data-levelren="levelren" :slots="slots" @change="onValuesChange"></mt-picker>
     </mt-popup>
   </div>

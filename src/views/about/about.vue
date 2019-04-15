@@ -50,7 +50,7 @@
       
     </ul>
     <ul class="zixun" v-show="tabSwitch==2">
-      <li>
+      <li style="background: url('./static/zixun-bg-01.png') no-repeat center center;">
         <div>骉轟科技：望城基地初建完成，将于8月进行骉轟科技：望城基地初建完成，将于8月进行骉轟科技：望城基地初建完成，将于8月进行</div>
       </li>
       <li class="zixun-news" v-for="(item,index) of newsList" :key="index" @click="aboutNewsDetail(item)">
@@ -211,7 +211,7 @@ export default {
   > li:nth-of-type(1) {
     height: 417px;
     width: 100%;
-    background: url("../../../static/zixun-bg-01.png") no-repeat center center;
+    
     border-radius: 20px;
     overflow: hidden;
     background-size: 100% 100%;
