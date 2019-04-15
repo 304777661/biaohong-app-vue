@@ -57,19 +57,19 @@
       </router-link>
     </div>
     <ul style="margin: 16px 0 24px 0;">
-      <router-link tag="a" to="/my" class="many-nav" @click.native="noServe">
+      <router-link tag="a" to="/my" class="many-nav">
         <img src="../../../static/mycenter-icon-1.png" alt>
         <span>派送</span>
         <img src="../../../static/rg-arrow.png" alt>
         <div class="line"></div>
       </router-link>
-      <router-link tag="a" to="/my" class="many-nav" @click.native="noServe">
+      <router-link tag="a" to="/my" class="many-nav">
         <img src="../../../static/mycenter-icon-2.png" alt>
         <span>加权分红</span>
         <img src="../../../static/rg-arrow.png" alt>
         <div class="line"></div>
       </router-link>
-      <router-link tag="a" to="/my" class="many-nav" @click.native="noServe">
+      <router-link tag="a" to="/my" class="many-nav">
         <img src="../../../static/mycenter-icon-3.png" alt>
         <span>系统消息</span>
         <img src="../../../static/rg-arrow.png" alt>

@@ -26,7 +26,7 @@
           <i class="iconfont iconxingxing1 pull-right"></i>
       </p>
     </div>
-    <div class="my-cell" @click="otherPage">
+    <div class="my-cell">
       <div>
         <i class="iconfont iconweizhi" style="color: #fa3338"></i>
         &nbsp;
@@ -188,7 +188,7 @@ export default {
       "index/getBaseData",
       result => {
         this.resultList = result;
-        console.log(this.resultList, 56);
+        // console.log(this.resultList, 56);
         this.reserveBgImg =
           "background: url('" +
           this.myAjax.apiRoot +

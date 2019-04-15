@@ -15,6 +15,7 @@ import MoveCar from '../views/moveCar/moveCar'
 import Vipcard from '../views/vipcard/index'
 import About from '../views/about/about'
 import AddressAbout from '../views/about/addressAbout'
+import AboutNews from '../views/about/aboutNews'
 /////////////// my ///////////////////////
 import My from '../views/my/index'
 
@@ -57,6 +58,7 @@ export default new Router({
             name: 'ReserveDetail',
             component: ReserveDetail
         },
+
         ///////////////////////////////////////////////
         /////////////// 移车  s-- ///////////////////////
         {
@@ -81,6 +83,11 @@ export default new Router({
             path: '/AddressAbout',
             name: 'AddressAbout',
             component: AddressAbout
+        },
+        {
+            path: '/aboutNews',
+            name: 'AboutNews',
+            component: AboutNews
         },
         ///////////////////////////////////////////////
         /////////////// my  s-- ///////////////////////

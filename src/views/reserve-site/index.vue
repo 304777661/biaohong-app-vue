@@ -26,7 +26,7 @@
         </div>
         <div>
           {{item.shopName}}
-          <button class="pull-right" @click="reserveDetail(item.shopId)">立即预约</button>
+          <button class="pull-right" @click="reserveDetail('103')">立即预约</button>
         </div>
         <div>
           <i class="iconfont iconweizhi"></i>距离暂无
@@ -52,7 +52,7 @@ export default {
   },
   data() {
     return {
-      resultList: null,
+      resultList: {},
       tabSwitch: 1,
       popupVisible: false,
       slots: [
@@ -70,7 +70,7 @@ export default {
       "index/loadBaseList",
       result => {
         this.resultList = result;
-        console.log(result.list, 80);
+        console.log(this.resultList, 66);
       },
       () => {},
       { AreaID: "" }

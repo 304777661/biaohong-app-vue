@@ -187,9 +187,9 @@ export default {
         fluid: true, // 当true时，Video.js player将拥有流体大小。换句话说，它将按比例缩放以适应其容器。
         sources: [
           {
-            src: this.videoSrc,
-            // src:
-            //   "http://192.168.10.68:8088/BiaohongAdmin/upload/news/1904/x21RC0CUKK.mp4",
+            // src: this.videoSrc,
+            src:
+              "http://app.bh8341.com/upload/news/1904/YugrtqGXz7.mp4",
             type: "video/mp4"
           }
         ],
@@ -215,6 +215,15 @@ export default {
       this.$router.push("/login");
     }
     this.myAjax.postData(
+      "newslist/queryNewslist",
+      result => {
+        this.resultList = result[0];
+        this.player.tag.src = result[0].mediaUrl;
+      },
+      () => {},
+      { TypeID: "1" }
+    );
+    this.myAjax.postData(
       "moment/queryMomentlist",
       result => {
         this.biaoJoop = result;
@@ -228,15 +237,7 @@ export default {
     );
   },
   mounted() {
-    this.myAjax.postData(
-      "newslist/queryNewslist",
-      result => {
-        this.resultList = result[0];
-        this.player.tag.src = result[0].mediaUrl;
-      },
-      () => {},
-      { TypeID: "1" }
-    );
+    
   },
   methods: {
     notOpen() {

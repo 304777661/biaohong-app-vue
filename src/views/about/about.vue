@@ -53,7 +53,7 @@
       <li>
         <div>骉轟科技：望城基地初建完成，将于8月进行骉轟科技：望城基地初建完成，将于8月进行骉轟科技：望城基地初建完成，将于8月进行</div>
       </li>
-      <li class="zixun-news" v-for="(item,index) of newsList" :key="index">
+      <li class="zixun-news" v-for="(item,index) of newsList" :key="index" @click="aboutNewsDetail(item)">
         <div>
           <p>{{item.news_title}}</p>
           <p>
@@ -146,9 +146,12 @@ export default {
     baseAbout() {
       this.$router.push("/addressAbout");
     },
+    aboutNewsDetail(arg){
+      arg=JSON.stringify(arg);
+      this.$router.push(`/aboutNews?aboutNewsDetail=${arg}`);
+    },
     dianzan(id, arg, index) {
-      console.log(index, 65);
-      console.log(this.biaoJoop, 65);
+      
       this.myAjax.postData(
         "moment/likeMoment",
         result => {
