@@ -59,7 +59,6 @@ export default {
                 params: dataParam
             })
             .then((response) => {
-                console.log(response.data, ajaxNumber++);
                 if (response.data.resultCode == 0) {
                     success(response.data);
                 } else {

@@ -72,14 +72,13 @@ export default {
           "&userName=" +
           this.userName,
         function(result) {
-          that.$toast("注册成功");
-          localStorage.token = result.resultData.token;
+          that.$toast(result.resultMsg);
           setTimeout(function() {
             that.$router.push("/login");
-          }, 2000);
+          }, 1000);
         },
         function(result) {
-          that.$toast(result.resultMsg);
+          // that.$toast(result.resultMsg);
         }
       );
       return false;

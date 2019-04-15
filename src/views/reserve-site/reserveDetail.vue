@@ -117,7 +117,7 @@ export default {
   data() {
     return {
       resultList: {},
-      reserveBgImg: "",
+      reserveBgImg: "background: url('http://app.bh8341.com/upload/base/1904/J3a4vK9fzH.jpg') no-repeat center center",
       startDateVal: "",
       startDate: new Date(),
       btnDefauleStart:
