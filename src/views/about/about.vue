@@ -15,117 +15,58 @@
       </li>
     </ul>
     <ul class="friend-loop" v-show="tabSwitch==1">
-      <li>
+      <li v-for="(item, index) of biaoJoop.list" :key="index" :id="item.id">
         <div class="people-msg">
           <div>
             <img src="../../../static/geren-header.png" alt>
           </div>
           <div>
-            <p class="geren-name">她的水彩笔</p>
+            <p class="geren-name">{{item.userName}}</p>
             <p class="geren-date">2小时前</p>
           </div>
           <div>来源：骉圈</div>
         </div>
         <div class="loop-text">
-          <p>青山灵园，可能是东京市区最冷门、最安静，也是最适合散步的赏樱地点了，如果你不介意这是一片墓地的话。樱花遮住了天空，过几天，花瓣应该又会遮住整条道路。</p>
+          <p>{{item.preface}}</p>
           <div class="loop-imgshiow">
-            <img src="../../../static/firend-loop-img.png" alt>
-            <img src="../../../static/firend-loop-img.png" alt>
-            <img src="../../../static/firend-loop-img.png" alt>
-            <img src="../../../static/firend-loop-img.png" alt>
-            <img src="../../../static/firend-loop-img.png" alt>
-            <img src="../../../static/firend-loop-img.png" alt>
+            <img v-for="(itemImg, indexImg) of JSON.parse(item.content)" :src="biaoJoop.baseUrl+itemImg.url" :key="indexImg" alt>
           </div>
         </div>
         <div class="loop-fun">
-          <span>
-            <i class="iconfont iconbuoumaotubiao15"></i>&nbsp;&nbsp;45
+          <span :id="item.id" @click="dianzan(item.id,item.isLike,index)">
+            <i v-show="item.isLike==0" class="iconfont iconbuoumaotubiao15">&nbsp;&nbsp;{{item.likeNum}}</i>
+            <i v-show="item.isLike==1" class="iconfont iconaixin_shixin">&nbsp;&nbsp;{{item.likeNum}}</i>
+            <!-- <i class="iconfont" v-bind:class="{iconbuoumaotubiao15:item.isLike==0, iconaixin_shixin:+item.isLike}"></i>&nbsp;&nbsp;{{item.likeNum}} -->
           </span>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <span>
-            <i class="iconfont iconliuyan"></i>&nbsp;&nbsp;145
+            <i class="iconfont iconliuyan"></i>&nbsp;&nbsp;0
           </span>
           <span class="pull-right">
             <i class="iconfont iconfenxiang"></i>&nbsp;&nbsp;
           </span>
         </div>
       </li>
-      <li>
-        <div class="people-msg">
-          <div>
-            <img src="../../../static/geren-header.png" alt>
-          </div>
-          <div>
-            <p class="geren-name">她的水彩笔</p>
-            <p class="geren-date">2小时前</p>
-          </div>
-          <div>来源：骉圈</div>
-        </div>
-        <div class="loop-text">
-          <p>青山灵园，可能是东京市区最冷门、最安静，也是最适合散步的赏樱地点了，如果你不介意这是一片墓地的话。樱花遮住了天空，过几天，花瓣应该又会遮住整条道路。</p>
-          <div class="loop-imgshiow">
-            <img src="../../../static/firend-loop-img.png" alt>
-            <img src="../../../static/firend-loop-img.png" alt>
-            <img src="../../../static/firend-loop-img.png" alt>
-            <img src="../../../static/firend-loop-img.png" alt>
-            <img src="../../../static/firend-loop-img.png" alt>
-            <img src="../../../static/firend-loop-img.png" alt>
-          </div>
-        </div>
-        <div class="loop-fun">
-          <span>
-            <i class="iconfont iconbuoumaotubiao15"></i>&nbsp;&nbsp;45
-          </span>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <span>
-            <i class="iconfont iconliuyan"></i>&nbsp;&nbsp;145
-          </span>
-          <span class="pull-right">
-            <i class="iconfont iconfenxiang"></i>&nbsp;&nbsp;
-          </span>
-        </div>
-      </li>
-      <li>
-        <div class="people-msg">
-          <div>
-            <img src="../../../static/geren-header.png" alt>
-          </div>
-          <div>
-            <p class="geren-name">她的水彩笔</p>
-            <p class="geren-date">2小时前</p>
-          </div>
-          <div>来源：骉圈</div>
-        </div>
-        <div class="loop-text">
-          <p>青山灵园，可能是东京市区最冷门、最安静，也是最适合散步的赏樱地点了，如果你不介意这是一片墓地的话。樱花遮住了天空，过几天，花瓣应该又会遮住整条道路。</p>
-          <div class="loop-imgshiow">
-            <img src="../../../static/firend-loop-img.png" alt>
-            <img src="../../../static/firend-loop-img.png" alt>
-            <img src="../../../static/firend-loop-img.png" alt>
-            <img src="../../../static/firend-loop-img.png" alt>
-            <img src="../../../static/firend-loop-img.png" alt>
-            <img src="../../../static/firend-loop-img.png" alt>
-          </div>
-        </div>
-        <div class="loop-fun">
-          <span>
-            <i class="iconfont iconbuoumaotubiao15"></i>&nbsp;&nbsp;45
-          </span>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <span>
-            <i class="iconfont iconliuyan"></i>&nbsp;&nbsp;145
-          </span>
-          <span class="pull-right">
-            <i class="iconfont iconfenxiang"></i>&nbsp;&nbsp;
-          </span>
-        </div>
-      </li>
+      
     </ul>
     <ul class="zixun" v-show="tabSwitch==2">
       <li>
         <div>骉轟科技：望城基地初建完成，将于8月进行骉轟科技：望城基地初建完成，将于8月进行骉轟科技：望城基地初建完成，将于8月进行</div>
       </li>
-      <li class="zixun-news">
+      <li class="zixun-news" v-for="(item,index) of newsList" :key="index">
+        <div>
+          <p>{{item.news_title}}</p>
+          <p>
+            {{item.author}}
+            <span class="news-date">·04-02</span>
+            <span class="pull-right">841分享</span>
+          </p>
+        </div>
+        <div>
+          <img src="../../../static/zixun-news-list.png" alt>
+        </div>
+      </li>
+      <!-- <li class="zixun-news">
         <div>
           <p>拿了国家两成新能源补贴的比亚迪，碰撞成绩如此不堪</p>
           <p>
@@ -150,20 +91,7 @@
         <div>
           <img src="../../../static/zixun-news-list.png" alt>
         </div>
-      </li>
-      <li class="zixun-news">
-        <div>
-          <p>拿了国家两成新能源补贴的比亚迪，碰撞成绩如此不堪</p>
-          <p>
-            中国新闻周刊
-            <span class="news-date">·04-02</span>
-            <span class="pull-right">841分享</span>
-          </p>
-        </div>
-        <div>
-          <img src="../../../static/zixun-news-list.png" alt>
-        </div>
-      </li>
+      </li> -->
     </ul>
     <footernav :imgActive="imgActive=3"></footernav>
   </div>
@@ -177,12 +105,36 @@ export default {
   data() {
     return {
       resultList: [],
-      tabSwitch: 1
+      newsList: [],
+      tabSwitch: 1,
+      biaoJoop: {}
     };
   },
   created() {
     if (this.$route.query.tabSwitch)
       this.tabSwitch = this.$route.query.tabSwitch;
+    this.myAjax.postData(
+      "moment/queryMomentlist",
+      result => {
+        this.biaoJoop = result;
+      },
+      () => {},
+      {
+        curPage: 1
+      },
+      this
+    );
+    this.myAjax.postData(
+      "newslist/queryNewslist",
+      result => {
+        this.newsList = result;
+      },
+      () => {},
+      {
+        TypeID: 2
+      },
+      this
+    );
   },
   mounted() {},
   methods: {
@@ -193,6 +145,25 @@ export default {
     news() {},
     baseAbout() {
       this.$router.push("/addressAbout");
+    },
+    dianzan(id, arg, index) {
+      console.log(index, 65);
+      console.log(this.biaoJoop, 65);
+      this.myAjax.postData(
+        "moment/likeMoment",
+        result => {
+          if (this.biaoJoop.list[index].isLike == 0) {
+            this.biaoJoop.list[index].likeNum += 1;
+            this.biaoJoop.list[index].isLike = 1;
+          } else {
+            this.biaoJoop.list[index].isLike = 0;
+            this.biaoJoop.list[index].likeNum -= 1;
+          }
+        },
+        () => {},
+        { momentId: id },
+        this
+      );
     }
   }
 };

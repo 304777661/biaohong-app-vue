@@ -47,7 +47,39 @@
           <i class="iconfont iconshuxian"></i>骉族推荐
         </p>
       </li>
-      <li>
+      <li v-for="(item, index) of biaoJoop.list" :key="index" :id="item.id">
+        <div class="people-msg">
+          <div>
+            <img src="../../../static/geren-header.png" alt>
+          </div>
+          <div>
+            <p class="geren-name">{{item.userName}}</p>
+            <p class="geren-date">2小时前</p>
+          </div>
+          <div>来源：骉圈</div>
+        </div>
+        <div class="loop-text">
+          <p>{{item.preface}}</p>
+          <div class="loop-imgshiow">
+            <img v-for="(itemImg, indexImg) of JSON.parse(item.content)" :src="biaoJoop.baseUrl+itemImg.url" :key="indexImg" alt>
+          </div>
+        </div>
+        <div class="loop-fun">
+          <span :id="item.id" @click="dianzan(item.id,item.isLike,index)">
+            <i v-show="item.isLike==0" class="iconfont iconbuoumaotubiao15">&nbsp;&nbsp;{{item.likeNum}}</i>
+            <i v-show="item.isLike==1" class="iconfont iconaixin_shixin">&nbsp;&nbsp;{{item.likeNum}}</i>
+            <!-- <i class="iconfont" v-bind:class="{iconbuoumaotubiao15:item.isLike==0, iconaixin_shixin:+item.isLike}"></i>&nbsp;&nbsp;{{item.likeNum}} -->
+          </span>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <span>
+            <i class="iconfont iconliuyan"></i>&nbsp;&nbsp;0
+          </span>
+          <span class="pull-right">
+            <i class="iconfont iconfenxiang"></i>&nbsp;&nbsp;
+          </span>
+        </div>
+      </li>
+      <!-- <li>
         <div class="people-msg">
           <div>
             <img src="../../../static/geren-header.png" alt>
@@ -116,42 +148,7 @@
             <i class="iconfont iconfenxiang"></i>&nbsp;&nbsp;
           </span>
         </div>
-      </li>
-      <li>
-        <div class="people-msg">
-          <div>
-            <img src="../../../static/geren-header.png" alt>
-          </div>
-          <div>
-            <p class="geren-name">她的水彩笔</p>
-            <p class="geren-date">2小时前</p>
-          </div>
-          <div>来源：骉圈</div>
-        </div>
-        <div class="loop-text">
-          <p>青山灵园，可能是东京市区最冷门、最安静，也是最适合散步的赏樱地点了，如果你不介意这是一片墓地的话。樱花遮住了天空，过几天，花瓣应该又会遮住整条道路。</p>
-          <div class="loop-imgshiow">
-            <img src="../../../static/firend-loop-img.png" alt>
-            <img src="../../../static/firend-loop-img.png" alt>
-            <img src="../../../static/firend-loop-img.png" alt>
-            <img src="../../../static/firend-loop-img.png" alt>
-            <img src="../../../static/firend-loop-img.png" alt>
-            <img src="../../../static/firend-loop-img.png" alt>
-          </div>
-        </div>
-        <div class="loop-fun">
-          <span>
-            <i class="iconfont iconbuoumaotubiao15"></i>&nbsp;&nbsp;45
-          </span>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <span>
-            <i class="iconfont iconliuyan"></i>&nbsp;&nbsp;145
-          </span>
-          <span class="pull-right">
-            <i class="iconfont iconfenxiang"></i>&nbsp;&nbsp;
-          </span>
-        </div>
-      </li>
+      </li> -->
     </ul>
 
     <footernav :imgActive="imgActive=1"></footernav>
@@ -165,8 +162,11 @@ export default {
   },
   data() {
     return {
+      nostatus: 0,
+      isstatus: 1,
       isNowPage: true,
       videoSrc: "",
+      biaoJoop: {},
       resultList: {},
       tabSwitch: 1,
       indexNavImg: {
@@ -213,8 +213,19 @@ export default {
   created() {
     if (!localStorage.token) {
       this.$router.push("/login");
-    } else {
     }
+    this.myAjax.postData(
+      "moment/queryMomentlist",
+      result => {
+        this.biaoJoop = result;
+        console.log(this.biaoJoop, 888);
+      },
+      () => {},
+      {
+        curPage: 1
+      },
+      this
+    );
   },
   mounted() {
     this.myAjax.postData(
@@ -232,7 +243,26 @@ export default {
       this.$messagebox.alert("敬请期待", "暂未开放");
     },
     onPlayerPlay() {},
-    onPlayerPause() {}
+    onPlayerPause() {},
+    dianzan(id, arg, index) {
+      console.log(index, 65);
+      console.log(this.biaoJoop, 65);
+      this.myAjax.postData(
+        "moment/likeMoment",
+        result => {
+          if (this.biaoJoop.list[index].isLike == 0) {
+            this.biaoJoop.list[index].likeNum += 1;
+            this.biaoJoop.list[index].isLike = 1;
+          } else {
+            this.biaoJoop.list[index].isLike = 0;
+            this.biaoJoop.list[index].likeNum -= 1;
+          }
+        },
+        () => {},
+        { momentId: id },
+        this
+      );
+    }
   }
 };
 </script>

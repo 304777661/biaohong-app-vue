@@ -19,10 +19,10 @@
       </li>
     </ul>
     <ul class="reserve-list">
-      <li v-for="(item,index) of resultList" :key="index">
+      <li v-for="(item,index) of resultList.list" :key="index">
         <div>
           <!-- <img src="../../../static/reserve-list-img.png" alt> -->
-          <img :src="myAjax.apiRoot+item.pic" alt>
+          <img :src="resultList.baseUrl+item.pic" alt>
         </div>
         <div>
           {{item.shopName}}
@@ -52,20 +52,13 @@ export default {
   },
   data() {
     return {
-      resultList: [],
+      resultList: null,
       tabSwitch: 1,
       popupVisible: false,
       slots: [
         {
           flex: 1,
-          values: [
-            "2015-01",
-            "2015-02",
-            "2015-03",
-            "2015-04",
-            "2015-05",
-            "2015-06"
-          ],
+          values: ["长沙"],
           className: "picker-address",
           textAlign: "center"
         }
@@ -76,7 +69,7 @@ export default {
     this.myAjax.postData(
       "index/loadBaseList",
       result => {
-        this.resultList = result.list;
+        this.resultList = result;
         console.log(result.list, 80);
       },
       () => {},

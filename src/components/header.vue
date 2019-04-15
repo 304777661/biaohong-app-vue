@@ -10,59 +10,55 @@
 
 <script>
 export default {
-    props:['backBtn','bgc','title_page','rgUrl'],
-    data(){
-        return {
-            imgIconSrc: require('../../static/header-back-icon.png'),
-            imgIconSrc_1: require('../../static/header-back-icon-1.png')
-        }
+  props: ["backBtn", "bgc", "title_page", "rgUrl"],
+  data() {
+    return {
+      imgIconSrc: require("../../static/header-back-icon.png"),
+      imgIconSrc_1: require("../../static/header-back-icon-1.png")
+    };
+  },
+  created() {},
+  mounted() {},
+  methods: {
+    backImg() {
+      this.$router.go(-1);
     },
-    created(){
-
-    },
-    mounted(){
-
-    },
-    methods:{
-        backImg(){
-            this.$router.go(-1);
-        },
-        headerRgClick(){
-            this.$emit('headerRg');
-        }
+    headerRgClick() {
+      this.$emit("headerRg");
     }
-}
+  }
+};
 </script>
  <style lang='scss'>
-    header {
-        height: 80px;
-        line-height: 80px;
-        text-align: center;
-        font-size: 36px;
-        background-color: #e60012;
-        color: #fefefe;
-        img:nth-of-type(1) {
-            float: left;
-            margin-left: 34px;
-            width: 24px;
-            margin-top: 18px;
-        }
-        span {
-            width: 500px;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-            overflow: hidden;
-            display: inline-block;
-        }
-        img:nth-of-type(2) {
-            float: right;
-            margin-right: 34px;
-            width: 40px;
-            margin-top: 18px;
-        }
-    }
-    header.whiteTitle {
-        background-color: #fff;
-        color: #333333;
-    }
- </style>
+header {
+  height: 80px;
+  line-height: 80px;
+  text-align: center;
+  font-size: 36px;
+  background-color: #e60012;
+  color: #fefefe;
+  img:nth-of-type(1) {
+    float: left;
+    margin-left: 34px;
+    width: 24px;
+    margin-top: 18px;
+  }
+  span {
+    width: 500px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: inline-block;
+  }
+  img:nth-of-type(2) {
+    float: right;
+    margin-right: 34px;
+    width: 40px;
+    margin-top: 18px;
+  }
+}
+header.whiteTitle {
+  background-color: #fff;
+  color: #333333;
+}
+</style>

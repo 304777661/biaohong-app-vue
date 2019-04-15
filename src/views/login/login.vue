@@ -38,7 +38,7 @@
         <img src="../../../static/psd-switch.png" mode="widthFix" @click="psdShow">
       </div>
       <div class="psd-register form-row" style="border: none;">
-        <span @click="goOtherPage('forget-psd')">忘记密码？</span>
+        <span @click="goOtherPage('forgetPsd')">忘记密码？</span>
         <span style="color: #e60012;" @click="goOtherPage('register')">新用户注册</span>
       </div>
       <div style="text-align: center;">
@@ -56,8 +56,8 @@
 export default {
   data() {
     return {
-      userName: "13307487013",
-      passWord: "1",
+      userName: "",
+      passWord: "",
       showType: false
     };
   },

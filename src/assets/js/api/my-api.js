@@ -8,8 +8,8 @@ import router from '../../../router'
 
 Vue.use(VueAxios, axios)
     // const testApi = 'Biaohong/';
-const apiRoot = 'http://192.168.10.68:8080/Biaohong/';
-// const apiRoot = 'http://app.bh8341.com/';
+    // const apiRoot = 'http://192.168.10.79:8080/Biaohong/';
+const apiRoot = 'http://app.bh8341.com/';
 let ajaxNumber = 1;
 // let _this = this;
 let Vm = new Vue();

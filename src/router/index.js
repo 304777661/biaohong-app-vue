@@ -3,6 +3,7 @@ import Router from 'vue-router'
 
 import Login from '../views/login/login'
 import Register from '../views/login/register'
+import ForgetPsd from '../views/login/forgetPsd'
 /////////////// index ////////////////////
 import Index from '../views/index/index'
 /////////////// 预约场地 ///////////////////////
@@ -39,6 +40,11 @@ export default new Router({
             path: '/register',
             name: 'Register',
             component: Register
+        },
+        {
+            path: '/forgetPsd',
+            name: 'ForgetPsd',
+            component: ForgetPsd
         },
         /////////////// ReserveSite  s-- ///////////////////////
         {

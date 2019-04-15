@@ -21,10 +21,10 @@
         <img src="../../../static/city-friend.png" alt>
         <span>同城好友</span>
       </p>
-      <p>
+        <a :href="'tel:'+hujiaophone">
         <img src="../../../static/call-movecar.png" alt>
         <span>呼叫挪车</span>
-      </p>
+        </a>
     </div>
     <div class="footer" @click="blackPage">
       <i class="iconfont iconguanbi"></i>
@@ -34,12 +34,24 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      hujiaophone: ""
+    };
   },
   methods: {
     blackPage() {
       this.$router.go(-1);
     }
+  },
+  created() {
+    this.myAjax.postData(
+      "center/querySystemTelList",
+      result => {
+        this.hujiaophone = result[1].dataCode;
+      },
+      () => {},
+      {}
+    );
   }
 };
 </script>
@@ -74,7 +86,8 @@ export default {
     flex: 1;
     align-items: flex-end;
     padding-bottom: 100px;
-    > p {
+    > p,
+    > a {
       display: flex;
       justify-content: space-between;
       flex-direction: column;

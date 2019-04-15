@@ -3,11 +3,11 @@
     <headerpage
       :title_page="title_page='个人中心'"
       :backBtn="backBtn=0"
-      :rgUrl="rgUrl='../../../static/geren-edit.png'"
+      :rgUrl="rgUrl='../../static/geren-edit.png'"
     ></headerpage>
     <div
       class="avater"
-      style=""
+      style="background: url('./static/geren-header-bg.png') center no-repeat;"
     >
       <div class="avater-min">
         <div>
@@ -39,43 +39,43 @@
       </div>
     </div>
     <div class="book-nav">
-      <router-link tag="a" to="/my-borrowing">
+      <router-link tag="a" to="/my" @click.native="noServe">
         <img src="../../../static/book-nav-icon1.png" alt>
         <span>我的会员卡</span>
       </router-link>
-      <router-link tag="a" to="/overdue-book">
+      <router-link tag="a" to="/my" @click.native="noServe">
         <img src="../../../static/book-nav-icon2.png" alt>
         <span>我的预约</span>
       </router-link>
-      <router-link tag="a" to="/borrow-book-list">
+      <router-link tag="a" to="/my" @click.native="noServe">
         <img src="../../../static/book-nav-icon3.png" alt>
         <span>我的推荐</span>
       </router-link>
-      <router-link tag="a" to="/borrow-book-list">
+      <router-link tag="a" to="/my" @click.native="noServe">
         <img src="../../../static/book-nav-icon4.png" alt>
         <span>我的返佣</span>
       </router-link>
     </div>
     <ul style="margin: 16px 0 24px 0;">
-      <router-link tag="a" to="/my-serve" class="many-nav">
+      <router-link tag="a" to="/my" class="many-nav" @click.native="noServe">
         <img src="../../../static/mycenter-icon-1.png" alt>
         <span>派送</span>
         <img src="../../../static/rg-arrow.png" alt>
         <div class="line"></div>
       </router-link>
-      <router-link tag="a" to="/my-pre-borrow" class="many-nav">
+      <router-link tag="a" to="/my" class="many-nav" @click.native="noServe">
         <img src="../../../static/mycenter-icon-2.png" alt>
         <span>加权分红</span>
         <img src="../../../static/rg-arrow.png" alt>
         <div class="line"></div>
       </router-link>
-      <router-link tag="a" to="/my-collect" class="many-nav">
+      <router-link tag="a" to="/my" class="many-nav" @click.native="noServe">
         <img src="../../../static/mycenter-icon-3.png" alt>
         <span>系统消息</span>
         <img src="../../../static/rg-arrow.png" alt>
         <div class="line"></div>
       </router-link>
-      <a @click="notOpen" class="many-nav" href="tel:10000">
+      <a class="many-nav" :href="'tel:'+lianxiphone">
         <img src="../../../static/mycenter-icon-4.png" alt>
         <span>联系官方</span>
         <img src="../../../static/rg-arrow.png" alt>
@@ -104,6 +104,7 @@ export default {
       avaterbgUrl: require("../../../static/geren-header-bg.png"),
       result: "",
       vipCardList: "",
+      lianxiphone: "",
       popupVisible: false,
       levelren: 0,
       slots: [
@@ -151,6 +152,9 @@ export default {
         this.wechatBuy(this.vipCardList[index]);
       }
       // this.$messagebox.alert(values);
+    },
+    noServe() {
+      this.$messagebox.alert("敬请期待", "暂未开放");
     },
     overBuy() {},
     wechatBuy(arg) {
@@ -208,6 +212,14 @@ export default {
       () => {},
       {}
     );
+    this.myAjax.postData(
+      "center/querySystemTelList",
+      result => {
+        this.lianxiphone = result[0].dataCode;
+      },
+      () => {},
+      {}
+    );
   }
 };
 </script>
@@ -218,7 +230,7 @@ div.my-center {
   background-color: #fff;
   .avater {
     display: flex;
-    background: url("../../../static/geren-header-bg.png") center no-repeat;
+
     background-size: 100% 100%;
     align-items: center;
     justify-content: space-between;
