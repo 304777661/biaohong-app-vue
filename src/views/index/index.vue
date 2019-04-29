@@ -97,9 +97,59 @@
         <mt-tab-item id="3">新闻公告</mt-tab-item>
       </mt-navbar>
       <mt-tab-container v-model="selected">
-        <mt-tab-container-item id="1"></mt-tab-container-item>
-        <mt-tab-container-item id="2"></mt-tab-container-item>
-        <mt-tab-container-item id="3"></mt-tab-container-item>
+        <mt-tab-container-item id="1">
+          <div class="pingtaiJS">
+            <p class="title">湖南骉轟科技——首家汽车驾驶体验综合体</p>
+            <p class="text-con">湖南骉轰科技有限公司由北斗荟集团与湖南靠谱科技有限公司强强联手打造。</p>
+            <img src="../../../static/pingtaiJS.png" alt>
+            <p>湖南骉轰科技有限公司是一家专业提供高端汽车驾驶体验的互联网垂直社区兴趣平台。公司成立于2019年，由北斗荟集团与湖南靠谱科技股份有限公司联合孵化,注册资本1000万,投资总额逾2亿,团队达百人。</p>
+            <p>公司始终以坚持发扬“诚信、创新、沟通”为企业宗旨以"技术、人、车、服务"为立业之本,并形成了一套集研发、搭建、交互、营销等为一体的新型大众娱乐消费体系，致力于打造国内首家以汽车驾驶体验为核心的运营综合体。</p>
+          </div>
+        </mt-tab-container-item>
+        <mt-tab-container-item id="2">
+          <div class="qiyewenh">
+            <h5>湖南骉轟科技——首家汽车驾驶体验综合体</h5>
+            <p class="red-color">
+              <i class="iconfont iconluntai"></i> 创新精神
+            </p>
+            <p>创新是这个时代的要求，创新是打破固有的思维模式，更是获取发展空间的重要途径。</p>
+            <p class="red-color">
+              <i class="iconfont iconluntai"></i> 合作发展
+            </p>
+            <p>与各界同行合作，在合作中快速发展；与广大用户合作在服务中不断提高自身技术水平；注重公司内部合作，强调团队精神，相互信任和有效沟通。</p>
+            <p class="red-color">
+              <i class="iconfont iconluntai"></i> 团队合作
+            </p>
+            <p>我们坚信集体配合和沟通的重要，我们珍视公司所有人员的团结和合作。</p>
+          </div>
+        </mt-tab-container-item>
+        <mt-tab-container-item id="3">
+          <ul>
+            <li class="zixun-news">
+              <div>
+                <p>拿了国家两成新能源补贴的比亚迪，碰撞成绩如此不堪</p>
+                <p>
+                  中国新闻周刊
+                  <span class="news-date">·04-02</span>
+                  <span class="pull-right">841分享</span>
+                </p>
+              </div>
+              <div>
+                <img src="../../../static/zixun-news-list.png" alt>
+              </div>
+            </li>
+            <li class="zixun-news">
+              <div>
+                <p>趣读|《飞驰人生》的另一面：成为一个赛车手要烧多少钱？</p>
+                <p>
+                  每日经济新闻
+                  <span class="news-date">·04-02</span>
+                  <span class="pull-right">841分享</span>
+                </p>
+              </div>
+            </li>
+          </ul>
+        </mt-tab-container-item>
       </mt-tab-container>
     </ul>
 
@@ -199,7 +249,6 @@ export default {
       "moment/queryMomentlist",
       result => {
         this.biaoJoop = result;
-        console.log(this.biaoJoop, 888);
       },
       () => {},
       {
@@ -241,8 +290,81 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scope>
 #index {
+  .mint-tab-container-item {
+    padding: 70px 30px 100px 30px;
+  }
+  .zixun-news {
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #ebebeb;
+    display: flex;
+    justify-content: space-between;
+    > div:nth-of-type(1) {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      > p:nth-of-type(1) {
+        font-size: 32px;
+        color: #333333;
+      }
+      > p:nth-of-type(2) {
+        font-size: 25px;
+        color: #333333;
+        .news-date {
+          color: #999999;
+        }
+      }
+    }
+    > div:nth-of-type(2) {
+      padding-left: 40px;
+      height: 195px;
+      img {
+        width: 200px;
+        height: 100%;
+      }
+    }
+  }
+  .qiyewenh {
+    h5 {
+      height: 50px;
+      line-height: 50px;
+      font-size: 34px;
+      color: #333333;
+      font-weight: 500;
+    }
+    .red-color {
+      margin: 20px;
+      height: 50px;
+      line-height: 50px;
+      font-size: 32px;
+      color: #fa3338;
+      font-weight: 500;
+      i {
+        font-size: 36px;
+      }
+    }
+    p {
+      font-size: 20px;
+    }
+  }
+  .pingtaiJS {
+    p.title {
+      font-size: 34px;
+      color: #333333;
+    }
+    img {
+      width: 100%;
+      height: 500px;
+    }
+    p {
+      font-size: 32px;
+      color: #333333;
+      margin-bottom: 30px;
+    }
+  }
+
   .tishi {
     margin-top: 30px;
     .mint-tab-item-label {

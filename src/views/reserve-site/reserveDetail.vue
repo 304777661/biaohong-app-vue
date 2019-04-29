@@ -1,9 +1,6 @@
 <template>
   <div id="reserveDetail">
-    <div
-      class="top"
-      :style="reserveBgImg"
-    >
+    <div class="top" :style="reserveBgImg">
       <span class="black-btn" @click="blackBtn">
         <img src="../../../static/header-back-icon-1.png" alt>
       </span>
@@ -20,10 +17,10 @@
         &nbsp;&nbsp;
         <mt-badge type="warning" size="large">会员价 50</mt-badge>
         <i class="iconfont iconxingxing pull-right"></i>
-          <i class="iconfont iconxingxing1 pull-right"></i>
-          <i class="iconfont iconxingxing1 pull-right"></i>
-          <i class="iconfont iconxingxing1 pull-right"></i>
-          <i class="iconfont iconxingxing1 pull-right"></i>
+        <i class="iconfont iconxingxing1 pull-right"></i>
+        <i class="iconfont iconxingxing1 pull-right"></i>
+        <i class="iconfont iconxingxing1 pull-right"></i>
+        <i class="iconfont iconxingxing1 pull-right"></i>
       </p>
     </div>
     <div class="my-cell">
@@ -44,7 +41,7 @@
         <!-- <li>
           <span>结束日期</span>
           <button>2019-01-01</button>
-        </li> -->
+        </li>-->
         <li>
           <span>预约教练</span>
           <button
@@ -117,7 +114,8 @@ export default {
   data() {
     return {
       resultList: {},
-      reserveBgImg: "background: url('http://app.bh8341.com/upload/base/1904/J3a4vK9fzH.jpg') no-repeat center center",
+      reserveBgImg:
+        "background: url('http://app.bh8341.com/upload/base/1904/J3a4vK9fzH.jpg') no-repeat center center",
       startDateVal: "",
       startDate: new Date(),
       btnDefauleStart:
@@ -134,7 +132,7 @@ export default {
       slots: [
         {
           flex: 1,
-          values: ["欧阳洋洋"],
+          values: ["不用教练", "欧阳洋洋", "王大勇"],
           className: "picker-content",
           textAlign: "center"
         }
@@ -191,7 +189,6 @@ export default {
         // console.log(this.resultList, 56);
         this.reserveBgImg =
           "background: url('" +
-          this.myAjax.apiRoot +
           this.resultList.pic +
           "') no-repeat center center";
         console.log(result.list, 80);

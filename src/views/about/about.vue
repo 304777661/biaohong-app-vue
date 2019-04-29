@@ -29,13 +29,24 @@
         <div class="loop-text">
           <p>{{item.preface}}</p>
           <div class="loop-imgshiow">
-            <img v-for="(itemImg, indexImg) of JSON.parse(item.content)" :src="biaoJoop.baseUrl+itemImg.url" :key="indexImg" alt>
+            <img
+              v-for="(itemImg, indexImg) of JSON.parse(item.content)"
+              :src="biaoJoop.baseUrl+itemImg.url"
+              :key="indexImg"
+              alt
+            >
           </div>
         </div>
         <div class="loop-fun">
           <span :id="item.id" @click="dianzan(item.id,item.isLike,index)">
-            <i v-show="item.isLike==0" class="iconfont iconbuoumaotubiao15">&nbsp;&nbsp;{{item.likeNum}}</i>
-            <i v-show="item.isLike==1" class="iconfont iconaixin_shixin">&nbsp;&nbsp;{{item.likeNum}}</i>
+            <i
+              v-show="item.isLike==0"
+              class="iconfont iconbuoumaotubiao15"
+            >&nbsp;&nbsp;{{item.likeNum}}</i>
+            <i
+              v-show="item.isLike==1"
+              class="iconfont iconaixin_shixin"
+            >&nbsp;&nbsp;{{item.likeNum}}</i>
             <!-- <i class="iconfont" v-bind:class="{iconbuoumaotubiao15:item.isLike==0, iconaixin_shixin:+item.isLike}"></i>&nbsp;&nbsp;{{item.likeNum}} -->
           </span>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -47,13 +58,17 @@
           </span>
         </div>
       </li>
-      
     </ul>
     <ul class="zixun" v-show="tabSwitch==2">
       <li style="background: url('./static/zixun-bg-01.png') no-repeat center center;">
         <div>骉轟科技：望城基地初建完成，将于8月进行骉轟科技：望城基地初建完成，将于8月进行骉轟科技：望城基地初建完成，将于8月进行</div>
       </li>
-      <li class="zixun-news" v-for="(item,index) of newsList" :key="index" @click="aboutNewsDetail(item)">
+      <li
+        class="zixun-news"
+        v-for="(item,index) of newsList"
+        :key="index"
+        @click="aboutNewsDetail(item)"
+      >
         <div>
           <p>{{item.news_title}}</p>
           <p>
@@ -91,7 +106,7 @@
         <div>
           <img src="../../../static/zixun-news-list.png" alt>
         </div>
-      </li> -->
+      </li>-->
     </ul>
     <footernav :imgActive="imgActive=3"></footernav>
   </div>
@@ -146,12 +161,11 @@ export default {
     baseAbout() {
       this.$router.push("/addressAbout");
     },
-    aboutNewsDetail(arg){
-      arg=JSON.stringify(arg);
+    aboutNewsDetail(arg) {
+      arg = JSON.stringify(arg);
       this.$router.push(`/aboutNews?aboutNewsDetail=${arg}`);
     },
     dianzan(id, arg, index) {
-      
       this.myAjax.postData(
         "moment/likeMoment",
         result => {
@@ -198,7 +212,7 @@ export default {
     padding-left: 40px;
     height: 195px;
     img {
-      width: 100%;
+      width: 200px;
       height: 100%;
     }
   }
@@ -211,7 +225,7 @@ export default {
   > li:nth-of-type(1) {
     height: 417px;
     width: 100%;
-    
+
     border-radius: 20px;
     overflow: hidden;
     background-size: 100% 100%;

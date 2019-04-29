@@ -1,11 +1,11 @@
 <template>
-    <div>
-        <header class="clearfix" :class="{whiteTitle:backBtn===2}">
-            <img v-show='backBtn' @click="backImg" :src="backBtn===2?imgIconSrc_1:imgIconSrc">
-            <span>{{title_page}}</span>
-            <img v-show="rgUrl" :src="rgUrl" @click="headerRgClick">
-        </header>
-    </div>
+  <div>
+    <header class="clearfix" :class="{whiteTitle:backBtn===2}">
+      <img v-show="backBtn" @click="backImg" :src="backBtn===2?imgIconSrc_1:imgIconSrc">
+      <span>{{title_page}}</span>
+      <img v-show="rgUrl" :src="rgUrl" @click="headerRgClick">
+    </header>
+  </div>
 </template>
 
 <script>

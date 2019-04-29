@@ -34,13 +34,22 @@
         :data-id="item.cardNo"
         @click="pickerBuyType(item)"
       >
-        <span>{{item.price/100}}元</span>
-        <p v-show="item.cardType==1">体验官</p>
-        <p v-show="item.cardType==2">修路人</p>
-        <p v-show="item.cardType==3">段长</p>
+        <p v-show="item.cardType==2||item.cardType==3">成为</p>
+        <span v-show="item.cardType==1">体验馆</span>
+
+        <span v-show="item.cardType==2">
+          <font color="#333">
+            <b>修路人</b>
+          </font>
+        </span>
+        <span v-show="item.cardType==3">
+          <font color="#333">
+            <b>段长</b>
+          </font>
+        </span>
       </div>
     </div>
-    <div class="book-nav">
+    <!-- <div class="book-nav">
       <router-link tag="a" to="/my" @click.native="noServe">
         <img src="../../../static/book-nav-icon1.png" alt>
         <span>我的会员卡</span>
@@ -57,9 +66,39 @@
         <img src="../../../static/book-nav-icon4.png" alt>
         <span>我的返佣</span>
       </router-link>
-    </div>
+    </div>-->
     <ul style="margin: 16px 0 24px 0;">
-      <router-link tag="a" to="/my" class="many-nav">
+      <router-link class="many-nav" tag="a" to="/my" @click.native="noServe">
+        <img src="../../../static/book-nav-icon4.png" alt>
+        <span>我的钱包</span>
+        <img src="../../../static/rg-arrow.png" alt>
+        <div class="line"></div>
+      </router-link>
+      <router-link class="many-nav" tag="a" to="/my" @click.native="noServe">
+        <img src="../../../static/book-nav-icon1.png" alt>
+        <span>我的会员卡</span>
+        <img src="../../../static/rg-arrow.png" alt>
+        <div class="line"></div>
+      </router-link>
+      <router-link class="many-nav" tag="a" to="/my" @click.native="noServe">
+        <img src="../../../static/book-nav-icon2.png" alt>
+        <span>我的预约</span>
+        <img src="../../../static/rg-arrow.png" alt>
+        <div class="line"></div>
+      </router-link>
+      <router-link class="many-nav" tag="a" to="/my" @click.native="noServe">
+        <img src="../../../static/book-nav-icon3.png" alt>
+        <span>我的推荐</span>
+        <img src="../../../static/rg-arrow.png" alt>
+        <div class="line"></div>
+      </router-link>
+      <!-- <router-link class="many-nav" tag="a" to="/my" @click.native="noServe">
+        <img src="../../../static/book-nav-icon4.png" alt>
+        <span>我的返佣</span>
+        <img src="../../../static/rg-arrow.png" alt>
+        <div class="line"></div>
+      </router-link>-->
+      <!-- <router-link tag="a" to="/my" class="many-nav">
         <img src="../../../static/mycenter-icon-1.png" alt>
         <span>派送</span>
         <img src="../../../static/rg-arrow.png" alt>
@@ -70,7 +109,7 @@
         <span>加权分红</span>
         <img src="../../../static/rg-arrow.png" alt>
         <div class="line"></div>
-      </router-link>
+      </router-link>-->
       <router-link tag="a" to="/my" class="many-nav">
         <img src="../../../static/mycenter-icon-3.png" alt>
         <span>系统消息</span>
