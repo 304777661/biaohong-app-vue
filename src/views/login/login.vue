@@ -82,7 +82,7 @@ export default {
           localStorage.token = result.resultData.token;
           setTimeout(function() {
             that.$router.push("/");
-          }, 2000);
+          }, 1000);
         },
         function(result) {
           that.$toast(result.resultMsg);

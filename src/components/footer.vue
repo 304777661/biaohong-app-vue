@@ -20,7 +20,7 @@
               <img class="mover-car-img" :src="imgActive==4?navImgUrl_active4:navImgUrl_4" alt>
             </span>
           </div>
-          <span>匿名移车</span>
+          <span>商家入驻</span>
         </router-link>
       </li>
       <li>

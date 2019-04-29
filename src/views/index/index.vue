@@ -1,8 +1,8 @@
 <template>
-  <div class="index">
+  <div class="index" id="index">
     <header class="clearfix">
       骉族
-      <i class="iconfont iconxiaoxi pull-right">&nbsp;&nbsp;</i>
+      <i @click="headerClick" class="iconfont iconmore pull-right">&nbsp;&nbsp;</i>
     </header>
     <div class="my-swiper">
       <mt-swipe :auto="2000">
@@ -26,7 +26,8 @@
         <i class="iconfont iconxiaoxilaba"></i> 骉轟科技将在2019-03-29召开2019新品发布会！
       </div>
       <p class="title-text">
-        <i class="iconfont iconshuxian"></i>{{resultList.news_title}}
+        <i class="iconfont iconshuxian"></i>
+        {{resultList.news_title}}
       </p>
       <video-player
         class="video-player vjs-custom-skin self-video"
@@ -44,10 +45,11 @@
     <ul class="friend-loop">
       <li>
         <p class="title-text">
-          <i class="iconfont iconshuxian"></i>骉族推荐
+          <i class="iconfont iconshuxian"></i>骉族科技
+          <span class="pull-right openkaix">越玩悦开心</span>
         </p>
       </li>
-      <li v-for="(item, index) of biaoJoop.list" :key="index" :id="item.id">
+      <!-- <li v-for="(item, index) of biaoJoop.list" :key="index" :id="item.id">
         <div class="people-msg">
           <div>
             <img src="../../../static/geren-header.png" alt>
@@ -61,14 +63,24 @@
         <div class="loop-text">
           <p>{{item.preface}}</p>
           <div class="loop-imgshiow">
-            <img v-for="(itemImg, indexImg) of JSON.parse(item.content)" :src="biaoJoop.baseUrl+itemImg.url" :key="indexImg" alt>
+            <img
+              v-for="(itemImg, indexImg) of JSON.parse(item.content)"
+              :src="biaoJoop.baseUrl+itemImg.url"
+              :key="indexImg"
+              alt
+            >
           </div>
         </div>
         <div class="loop-fun">
           <span :id="item.id" @click="dianzan(item.id,item.isLike,index)">
-            <i v-show="item.isLike==0" class="iconfont iconbuoumaotubiao15">&nbsp;&nbsp;{{item.likeNum}}</i>
-            <i v-show="item.isLike==1" class="iconfont iconaixin_shixin">&nbsp;&nbsp;{{item.likeNum}}</i>
-            <!-- <i class="iconfont" v-bind:class="{iconbuoumaotubiao15:item.isLike==0, iconaixin_shixin:+item.isLike}"></i>&nbsp;&nbsp;{{item.likeNum}} -->
+            <i
+              v-show="item.isLike==0"
+              class="iconfont iconbuoumaotubiao15"
+            >&nbsp;&nbsp;{{item.likeNum}}</i>
+            <i
+              v-show="item.isLike==1"
+              class="iconfont iconaixin_shixin"
+            >&nbsp;&nbsp;{{item.likeNum}}</i>
           </span>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <span>
@@ -78,87 +90,45 @@
             <i class="iconfont iconfenxiang"></i>&nbsp;&nbsp;
           </span>
         </div>
-      </li>
-      <!-- <li>
-        <div class="people-msg">
-          <div>
-            <img src="../../../static/geren-header.png" alt>
-          </div>
-          <div>
-            <p class="geren-name">她的水彩笔</p>
-            <p class="geren-date">2小时前</p>
-          </div>
-          <div>来源：骉圈</div>
-        </div>
-        <div class="loop-text">
-          <p>青山灵园，可能是东京市区最冷门、最安静，也是最适合散步的赏樱地点了，如果你不介意这是一片墓地的话。樱花遮住了天空，过几天，花瓣应该又会遮住整条道路。</p>
-          <div class="loop-imgshiow">
-            <img src="../../../static/firend-loop-img.png" alt>
-            <img src="../../../static/firend-loop-img.png" alt>
-            <img src="../../../static/firend-loop-img.png" alt>
-            <img src="../../../static/firend-loop-img.png" alt>
-            <img src="../../../static/firend-loop-img.png" alt>
-            <img src="../../../static/firend-loop-img.png" alt>
-          </div>
-        </div>
-        <div class="loop-fun">
-          <span>
-            <i class="iconfont iconbuoumaotubiao15"></i>&nbsp;&nbsp;45
-          </span>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <span>
-            <i class="iconfont iconliuyan"></i>&nbsp;&nbsp;145
-          </span>
-          <span class="pull-right">
-            <i class="iconfont iconfenxiang"></i>&nbsp;&nbsp;
-          </span>
-        </div>
-      </li>
-      <li>
-        <div class="people-msg">
-          <div>
-            <img src="../../../static/geren-header.png" alt>
-          </div>
-          <div>
-            <p class="geren-name">她的水彩笔</p>
-            <p class="geren-date">2小时前</p>
-          </div>
-          <div>来源：骉圈</div>
-        </div>
-        <div class="loop-text">
-          <p>青山灵园，可能是东京市区最冷门、最安静，也是最适合散步的赏樱地点了，如果你不介意这是一片墓地的话。樱花遮住了天空，过几天，花瓣应该又会遮住整条道路。</p>
-          <div class="loop-imgshiow">
-            <img src="../../../static/firend-loop-img.png" alt>
-            <img src="../../../static/firend-loop-img.png" alt>
-            <img src="../../../static/firend-loop-img.png" alt>
-            <img src="../../../static/firend-loop-img.png" alt>
-            <img src="../../../static/firend-loop-img.png" alt>
-            <img src="../../../static/firend-loop-img.png" alt>
-          </div>
-        </div>
-        <div class="loop-fun">
-          <span>
-            <i class="iconfont iconbuoumaotubiao15"></i>&nbsp;&nbsp;45
-          </span>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <span>
-            <i class="iconfont iconliuyan"></i>&nbsp;&nbsp;145
-          </span>
-          <span class="pull-right">
-            <i class="iconfont iconfenxiang"></i>&nbsp;&nbsp;
-          </span>
-        </div>
-      </li> -->
+      </li>-->
+      <mt-navbar v-model="selected" class="tishi">
+        <mt-tab-item id="1">平台介绍</mt-tab-item>
+        <mt-tab-item id="2">企业文化</mt-tab-item>
+        <mt-tab-item id="3">新闻公告</mt-tab-item>
+      </mt-navbar>
+      <mt-tab-container v-model="selected">
+        <mt-tab-container-item id="1"></mt-tab-container-item>
+        <mt-tab-container-item id="2"></mt-tab-container-item>
+        <mt-tab-container-item id="3"></mt-tab-container-item>
+      </mt-tab-container>
     </ul>
 
     <footernav :imgActive="imgActive=1"></footernav>
+    <mt-popup
+      v-model="popupVisible"
+      popup-transition="popup-fade"
+      class="mint-popup-1"
+      :style="{ top: 40 + 10 + 'px' ,left: 83+'%'}"
+    >
+      <div class="header-popup-out">
+        <div @click="popupVisible=false;noOpendialog=true">
+          <i class="iconfont iconsaoyisao"></i> &nbsp;同城好友
+        </div>
+        <div @click="popupVisible=false;noOpendialog=true">
+          <i class="iconfont iconyijianhujiao"></i> &nbsp;呼叫挪车
+        </div>
+      </div>
+    </mt-popup>
+    <no-open-dialog :popupVisible="noOpendialog"></no-open-dialog>
   </div>
 </template>
 <script>
 import footernav from "../../components/footer";
+import noOpenDialog from "../../components/noOpenDialog";
 export default {
   components: {
-    footernav
+    footernav,
+    noOpenDialog
   },
   data() {
     return {
@@ -188,8 +158,7 @@ export default {
         sources: [
           {
             // src: this.videoSrc,
-            src:
-              "http://app.bh8341.com/upload/news/1904/YugrtqGXz7.mp4",
+            src: "http://app.bh8341.com/upload/news/1904/YugrtqGXz7.mp4",
             type: "video/mp4"
           }
         ],
@@ -202,7 +171,10 @@ export default {
         //          remainingTimeDisplay: false,
         //          fullscreenToggle: true  //全屏按钮
         //        }
-      }
+      },
+      popupVisible: false,
+      noOpendialog: false,
+      selected: "1"
     };
   },
   computed: {
@@ -236,10 +208,11 @@ export default {
       this
     );
   },
-  mounted() {
-    
-  },
+  mounted() {},
   methods: {
+    headerClick() {
+      this.popupVisible = true;
+    },
     notOpen() {
       this.$messagebox.alert("敬请期待", "暂未开放");
     },
@@ -269,6 +242,43 @@ export default {
 </script>
 
 <style lang="scss">
+#index {
+  .tishi {
+    margin-top: 30px;
+    .mint-tab-item-label {
+      color: #333;
+      font-size: 33px;
+    }
+    .is-selected {
+      border-bottom-color: #fa3338;
+      text-decoration-line: none;
+      padding-left: 10px;
+      padding-right: 10px;
+      background-clip: content-box;
+      color: #fa3338;
+      .mint-tab-item-label {
+        color: rgb(250, 51, 56);
+      }
+    }
+  }
+}
+
+.openkaix {
+  font-size: 26px;
+  color: #666666;
+}
+.header-popup-out {
+  padding: 5px;
+  > div {
+    padding: 10px;
+    i {
+      vertical-align: baseline;
+    }
+  }
+  > div:nth-of-type(1) {
+    border-bottom: 1px solid rgb(235, 235, 235);
+  }
+}
 .loop-fun {
   height: 90px;
   line-height: 90px;
@@ -387,6 +397,10 @@ div.index {
     font-size: 36px;
     background-color: #e60012;
     color: #fefefe;
+    i {
+      height: 100%;
+      padding: 0 10px;
+    }
   }
 
   .my-swiper {
@@ -568,6 +582,20 @@ div.index {
 
   &:active {
     background-color: #ddd;
+  }
+}
+div.mint-popup-1 {
+  width: 240px;
+  border-radius: 8px;
+  padding: 10px;
+  transform: translate(-50%, 0);
+  // right: -200px;
+  h1 {
+    font-size: 20px;
+    color: #26a2ff;
+  }
+  p {
+    margin-bottom: 10px;
   }
 }
 </style>
