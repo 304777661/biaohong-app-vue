@@ -199,7 +199,7 @@ export default {
   }
 };
 </script>
-<style lang="scss" scope>
+<style lang="scss" scoped>
 #reserveDetail {
   background-color: #f0f1f2;
   .picker-content {

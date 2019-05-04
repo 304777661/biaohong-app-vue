@@ -29,7 +29,7 @@ export default {
   }
 };
 </script>
- <style lang='scss'>
+ <style lang='scss' scoped>
 header {
   height: 80px;
   line-height: 80px;
@@ -38,10 +38,12 @@ header {
   background-color: #e60012;
   color: #fefefe;
   img:nth-of-type(1) {
-    float: left;
-    margin-left: 34px;
+    // float: left;
+    position: absolute;
+    left: 0;
+    padding-left: 34px;
     width: 24px;
-    margin-top: 18px;
+    padding-top: 18px;
   }
   span {
     width: 500px;
@@ -51,14 +53,17 @@ header {
     display: inline-block;
   }
   img:nth-of-type(2) {
-    float: right;
-    margin-right: 34px;
+    // float: right;
+    position: absolute;
+    right: 0;
+    padding-right: 34px;
     width: 40px;
-    margin-top: 18px;
+    padding-top: 18px;
   }
 }
 header.whiteTitle {
   background-color: #fff;
   color: #333333;
+  border-bottom: 1px solid #e5e5e5;
 }
 </style>

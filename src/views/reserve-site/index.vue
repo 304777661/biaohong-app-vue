@@ -99,7 +99,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scope>
+<style lang="scss" scoped>
 #site-reserve {
   .reserve-list {
     padding: 20px 20px;

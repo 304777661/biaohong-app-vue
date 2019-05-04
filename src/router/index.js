@@ -18,6 +18,12 @@ import AddressAbout from '../views/about/addressAbout'
 import AboutNews from '../views/about/aboutNews'
 /////////////// my ///////////////////////
 import My from '../views/my/index'
+import Wallet from '../views/my/wallet'
+import Recharge from '../views/my/recharge'
+import Withdraw from '../views/my/withdraw'
+import Change from '../views/my/change'
+import SelfInfor from '../views/my/selfInfor'
+import BecomeDZ from '../views/my/becomeDZ'
 
 
 Vue.use(Router)
@@ -95,6 +101,36 @@ export default new Router({
             path: '/my',
             name: 'my',
             component: My
+        },
+        {
+            path: '/wallet',
+            name: 'wallet',
+            component: Wallet
+        },
+        {
+            path: '/recharge',
+            name: 'recharge',
+            component: Recharge
+        },
+        {
+            path: '/withdraw',
+            name: 'withdraw',
+            component: Withdraw
+        },
+        {
+            path: '/change',
+            name: 'change',
+            component: Change
+        },
+        {
+            path: '/selfInfor/:id',
+            name: 'selfInfor',
+            component: SelfInfor
+        },
+        {
+            path: '/becomeDZ',
+            name: 'becomeDZ',
+            component: BecomeDZ
         }
         /////////////// my  e-- ///////////////////////
         ///////////////////////////////////////////////

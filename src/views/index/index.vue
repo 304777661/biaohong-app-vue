@@ -2,14 +2,16 @@
   <div class="index" id="index">
     <header class="clearfix">
       骉族
-      <i @click="headerClick" class="iconfont iconmore pull-right">&nbsp;&nbsp;</i>
+      <i @click="headerClick" class="iconfont iconxiaoxi">&nbsp;&nbsp;</i>
     </header>
     <div class="my-swiper">
       <mt-swipe :auto="2000">
         <mt-swipe-item>
           <img class="lunpo-img" src="../../../static/index-lunpo01_02.png" alt>
         </mt-swipe-item>
-        <!-- <mt-swipe-item><img src="../../../static/lunpo02.jpg" alt=""></mt-swipe-item> -->
+        <mt-swipe-item>
+          <img class="lunpo-img" src="../../../static/index-lunpo02.png" alt>
+        </mt-swipe-item>
       </mt-swipe>
     </div>
     <!-- <nav>
@@ -290,7 +292,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scope>
+<style lang="scss" scoped>
 #index {
   .mint-tab-container-item {
     padding: 70px 30px 100px 30px;
@@ -522,6 +524,8 @@ div.index {
     i {
       height: 100%;
       padding: 0 10px;
+      right: 0;
+      position: absolute;
     }
   }
 

@@ -186,7 +186,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scope>
+<style lang="scss" scoped>
 .zixun-news {
   padding-bottom: 30px;
   border-bottom: 1px solid #ebebeb;

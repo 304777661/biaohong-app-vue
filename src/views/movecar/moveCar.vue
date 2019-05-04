@@ -21,10 +21,10 @@
         <img src="../../../static/city-friend.png" alt>
         <span>同城好友</span>
       </p>
-        <a :href="'tel:'+hujiaophone">
+      <a :href="'tel:'+hujiaophone">
         <img src="../../../static/call-movecar.png" alt>
         <span>呼叫挪车</span>
-        </a>
+      </a>
     </div>
     <div class="footer" @click="blackPage">
       <i class="iconfont iconguanbi"></i>
@@ -55,7 +55,7 @@ export default {
   }
 };
 </script>
-<style lang="scss" scope>
+<style lang="scss" scoped>
 #moveCar {
   height: 100%;
   padding: 110px 140px;

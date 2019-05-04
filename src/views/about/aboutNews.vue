@@ -25,7 +25,7 @@ export default {
   }
 };
 </script>
-<style lang="scss" scope>
+<style lang="scss" scoped>
 .aboutNews {
   padding: 50px 20px;
   h4 {

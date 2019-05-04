@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="model-dialog">
     <mt-popup v-model="popupVisible" popup-transition="popup-fade" :modal="false">
       <div class="no-open-dialog">
         <img src="../../static/no-open-top.png" alt>
@@ -28,9 +28,11 @@ export default {
   }
 };
 </script>
- <style lang="scss">
-.mint-popup {
-  border-radius: 40px;
+ <style lang="scss" scoped>
+.model-dialog {
+  .mint-popup {
+    border-radius: 40px;
+  }
 }
 .no-open-dialog {
   position: relative;

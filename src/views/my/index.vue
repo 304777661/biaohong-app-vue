@@ -3,7 +3,8 @@
     <headerpage
       :title_page="title_page='个人中心'"
       :backBtn="backBtn=0"
-      :rgUrl="rgUrl='./static/geren-edit.png'"
+      :rgUrl="rgUrl='./static/setting-icon.png'"
+      @headerRg="headerRg"
     ></headerpage>
     <div class="avater" style="background: url('./static/geren-header-bg.png') center no-repeat;">
       <div class="avater-min">
@@ -68,7 +69,7 @@
       </router-link>
     </div>-->
     <ul style="margin: 16px 0 24px 0;">
-      <router-link class="many-nav" tag="a" to="/my" @click.native="noServe">
+      <router-link class="many-nav" tag="a" to="/wallet">
         <img src="../../../static/book-nav-icon4.png" alt>
         <span>我的钱包</span>
         <img src="../../../static/rg-arrow.png" alt>
@@ -123,7 +124,7 @@
         <div class="line"></div>
       </a>
     </ul>
-    <div class="exit" @click="exitLogin" style="margin: 24px 0;">退出登录</div>
+    <!-- <div class="exit" @click="exitLogin" style="margin: 24px 0;">退出登录</div> -->
     <footernav :imgActive="imgActive=5"></footernav>
 
     <mt-popup
@@ -171,20 +172,23 @@ export default {
     };
   },
   methods: {
+    headerRg(arg = 1) {
+      this.$router.push(`/selfInfor/${arg}`);
+    },
     notOpen() {
       this.$messagebox.alert("敬请期待", "暂未开放");
       return false;
     },
-    exitLogin() {
-      localStorage.token = "";
-      this.$router.push("/login");
-    },
+
     pickerBuyType(arg) {
       if (this.result.usertype >= arg.cardType) {
         this.$messagebox.alert("您已是该级别");
       } else {
-        this.levelren = arg.cardType - 1;
-        this.popupVisible = true;
+        // this.levelren = arg.cardType - 1;
+        // this.popupVisible = true;
+        if (arg.cardType == 2) {
+          this.$router.push("/becomeDZ");
+        }
       }
     },
     onValuesChange(picker, values) {
@@ -270,7 +274,7 @@ export default {
 };
 </script>
 
-<style lang='scss'>
+<style lang='scss' scoped>
 div.my-center {
   padding-bottom: 100px;
   background-color: #fff;

@@ -1,0 +1,90 @@
+<template>
+  <div id="recharge">
+    <headerpage :title_page="title_page='充值'" :backBtn="backBtn=2" :rgUrl="rgUrl"></headerpage>
+    <ul>
+      <li>
+        <span>支付账户</span>
+        <b>
+          <i class="iconfont iconweixinzhifu"></i> 微信支付
+        </b>
+      </li>
+      <li>充值额度</li>
+      <li>
+        ￥
+        <b>1120.00</b>
+      </li>
+      <li>
+        <button>充值</button>
+      </li>
+    </ul>
+  </div>
+</template>
+<script>
+import headerpage from "../../components/header";
+export default {
+  name: "Wallet",
+  components: {
+    headerpage
+  },
+  data() {
+    return {
+      rgUrl: require("../../../static/jilu-back.png")
+    };
+  },
+  methods: {}
+};
+</script>
+<style lang="scss" scoped>
+#recharge {
+  //   padding: 20px;
+  > ul {
+    margin: 20px;
+    padding: 40px 40px 56px 40px;
+    box-shadow: 0px 2px 17px 0px rgba(51, 51, 51, 0.5);
+    border-radius: 14px;
+    opacity: 0.98;
+    li:nth-of-type(1) {
+      font-size: 29px;
+      display: flex;
+      justify-content: space-between;
+      span {
+        color: #666666;
+      }
+      b {
+        color: #333333;
+        i {
+          color: #41b035;
+        }
+      }
+    }
+    li:nth-of-type(2) {
+      font-size: 26px;
+      color: #666666;
+      margin-top: 80px;
+    }
+    li:nth-of-type(3) {
+      font-size: 40px;
+      color: #333333;
+      margin-top: 48px;
+      b {
+        font-size: 56px;
+      }
+      border-bottom: 1px solid #e5e5e5;
+    }
+    li:nth-of-type(4) {
+      text-align: center;
+      margin-top: 70px;
+      button {
+        width: 556px;
+        height: 84px;
+        line-height: 82px;
+        background-color: #fa3338;
+        border-radius: 31px;
+        font-size: 33px;
+        color: #fefefe;
+        text-align: center;
+      }
+    }
+  }
+}
+</style>
