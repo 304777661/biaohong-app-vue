@@ -52,7 +52,7 @@ export default {
     },
     rgClick() {},
     asc() {
-      alert(0);
+      //   alert(0);
       this.popupVisible = true;
     }
   }
