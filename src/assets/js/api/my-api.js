@@ -34,6 +34,7 @@ export default {
                     success(response.data.resultData);
                 } else if (response.data.resultCode == 5) {
                     thisObj.$toast(response.data.resultMsg);
+                    success(response.data.resultData);
                 } else if (response.data.resultCode == 1) {
                     thisObj.$toast(response.data.resultMsg);
                 } else if (response.data.resultCode == 1000) {

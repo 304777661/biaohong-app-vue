@@ -24,6 +24,7 @@ import Withdraw from '../views/my/withdraw'
 import Change from '../views/my/change'
 import SelfInfor from '../views/my/selfInfor'
 import BecomeDZ from '../views/my/becomeDZ'
+import BecomeXLR from '../views/my/becomeXLR'
 
 
 Vue.use(Router)
@@ -128,9 +129,14 @@ export default new Router({
             component: SelfInfor
         },
         {
-            path: '/becomeDZ',
+            path: '/becomeDZ/:id',
             name: 'becomeDZ',
             component: BecomeDZ
+        },
+        {
+            path: '/becomeXLR/:id',
+            name: 'becomeXLR',
+            component: BecomeXLR
         }
         /////////////// my  e-- ///////////////////////
         ///////////////////////////////////////////////

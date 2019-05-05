@@ -131,19 +131,19 @@ export default {
           : new Date().getDate()),
       popupVisible: false,
       maliNumber: 50,
-      currentTags: null,
+      currentTags: {},
       selected: "1",
-      coachFee:0,
+      coachFee: 0,
       pickerCoach: ""
     };
   },
   computed: {
     slots() {
       let arrPicker = this.resultList.coachList;
-      if(arrPicker){
-arrPicker.forEach(element => {
-        element.name += "--(" + element.mali/100 + "马力" + ")";
-      });
+      if (arrPicker) {
+        arrPicker.forEach(element => {
+          element.name += "--(" + element.mali / 100 + "马力" + ")";
+        });
       }
       return [
         {
@@ -155,8 +155,9 @@ arrPicker.forEach(element => {
       ];
     },
     sumMali() {
-      let sumFee = this.resultList.realityFee+(+this.maliNumber)*100+this.coachFee;
-      return sumFee/100
+      let sumFee =
+        this.resultList.realityFee + +this.maliNumber * 100 + this.coachFee;
+      return sumFee / 100;
     }
   },
   methods: {
@@ -187,9 +188,9 @@ arrPicker.forEach(element => {
     handleConfirm() {
       this.currentTags = this.$refs.pickerCoach.getValues()[0];
       this.pickerCoach = this.currentTags.name;
-      
-      this.coachFee = this.currentTags.fee;
-      // console.log(this.currentTags,99)
+
+      this.coachFee = this.currentTags.mali;
+      console.log(this.currentTags, 99);
       this.popupVisible = false;
     },
     onValuesChange(picker, values) {
@@ -198,7 +199,7 @@ arrPicker.forEach(element => {
       // this.$messagebox.alert(values);
     },
     submit() {
-      console.log(this.maliNumber);
+      console.log(this.currentTags);
       this.myAjax.postData(
         "index/subscribe",
         result => {
@@ -208,11 +209,11 @@ arrPicker.forEach(element => {
         {
           baseId: this.$route.query.baseId,
           subscribeDate: this.btnDefauleStart,
-          realityFee: this.resultList.realityFee,
-          coachId:this.currentTags.id,
-          coachFee: this.currentTags.mali/100,
-          totalFee:this.sumMali,
-          insuranceFee:this.maliNumber
+          realityFee: this.resultList.realityFee / 100,
+          coachId: this.currentTags.id,
+          coachFee: this.coachFee / 100,
+          totalFee: this.sumMali,
+          insuranceFee: this.maliNumber
         },
         this
       );
@@ -223,8 +224,14 @@ arrPicker.forEach(element => {
       "index/getBaseData",
       result => {
         this.resultList = result;
-        this.pickerCoach = result.coachList[0].name+"--(" + result.coachList[0].mali/100 + "马力" + ")";
+        this.pickerCoach =
+          result.coachList[0].name +
+          "--(" +
+          result.coachList[0].mali / 100 +
+          "马力" +
+          ")";
         this.coachFee = result.coachList[0].mali;
+        this.currentTags.id = result.coachList[0].id;
         this.reserveBgImg =
           "background: url('" +
           this.resultList.pic +

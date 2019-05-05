@@ -181,13 +181,28 @@ export default {
     },
 
     pickerBuyType(arg) {
+      // console.log(arg, 654);
       if (this.result.usertype >= arg.cardType) {
         this.$messagebox.alert("您已是该级别");
       } else {
         // this.levelren = arg.cardType - 1;
         // this.popupVisible = true;
+        if (arg.cardType == 1) {
+          this.myAjax.postData(
+            "settle/payCard",
+            result => {
+              this.$router.push("/recharge");
+            },
+            () => {},
+            { cardId: arg.id, affiliation: 0 },
+            this
+          );
+        }
         if (arg.cardType == 2) {
-          this.$router.push("/becomeDZ");
+          this.$router.push("/becomeXLR/" + arg.id);
+        }
+        if (arg.cardType == 3) {
+          this.$router.push("/becomeDZ/" + arg.id);
         }
       }
     },

@@ -247,17 +247,17 @@ export default {
       () => {},
       { TypeID: "1" }
     );
-    this.myAjax.postData(
-      "moment/queryMomentlist",
-      result => {
-        this.biaoJoop = result;
-      },
-      () => {},
-      {
-        curPage: 1
-      },
-      this
-    );
+    // this.myAjax.postData(
+    //   "moment/queryMomentlist",
+    //   result => {
+    //     this.biaoJoop = result;
+    //   },
+    //   () => {},
+    //   {
+    //     curPage: 1
+    //   },
+    //   this
+    // );
   },
   mounted() {},
   methods: {
@@ -294,6 +294,9 @@ export default {
 
 <style lang="scss" scoped>
 #index {
+  /deep/ .mint-tab-item-label {
+    font-size: 33px;
+  }
   .mint-tab-container-item {
     padding: 70px 30px 100px 30px;
   }

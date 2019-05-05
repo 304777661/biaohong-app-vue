@@ -2,7 +2,7 @@
   <div id="becomeXLR">
     <header class="clearfix">
       <img @click="blackPage" src="../../../static/header-back-icon-1.png" alt>
-      成为段长
+      成为修路人
       <span @click="pickerAddre">
         {{selectedName}}
         <i class="iconfont iconxiala"></i>
@@ -24,7 +24,7 @@
       </li>
     </ul>
     <mt-popup v-model="popupVisible" position="bottom" popup-transition="popup-fade">
-      <mt-picker ref="pickerAddress" :slots="slots" value-key="G_CName" :show-toolbar="true">
+      <mt-picker ref="pickerAddress" :slots="slots" value-key="shopName" :show-toolbar="true">
         <span class="mint-datetime-action mint-datetime-cancel" @click="handleCancel">取消</span>
         <span class="mint-datetime-action mint-datetime-confirm" @click="handleConfirm">确认</span>
       </mt-picker>
@@ -37,9 +37,9 @@ export default {
   components: {},
   data() {
     return {
-      result: null,
+      result: { list: [] },
       currentTags: null,
-      selectedName: "选择省份",
+      selectedName: "选择基地",
       rgUrl: require("../../../static/jilu-back.png"),
       popupVisible: false
     };
@@ -55,7 +55,7 @@ export default {
     },
     handleConfirm() {
       this.currentTags = this.$refs.pickerAddress.getValues()[0];
-      this.selectedName = this.currentTags.G_CName;
+      this.selectedName = this.currentTags.shopName;
       this.popupVisible = false;
     },
     handleCancel() {
@@ -68,10 +68,7 @@ export default {
           this.$router.push("/recharge");
         },
         () => {},
-        {
-          cardId: this.$route.params.id,
-          affiliation: this.currentTags.GroupID
-        },
+        { cardId: this.$route.params.id, affiliation: this.currentTags.pid },
         this
       );
     }
@@ -79,16 +76,19 @@ export default {
   created() {
     let that = this;
     this.myAjax.postData(
-      "area/loadAreaList",
+      "index/loadBaseList",
       result => {
         this.result = result;
-        this.$messagebox.alert("请先选择省份").then(() => {
+        this.$messagebox.alert("请先选择基地").then(() => {
           that.popupVisible = true;
         });
       },
       () => {},
       {
-        gpId: 0
+        TypeID: "",
+        GroupID: "",
+        AreaID: "",
+        curPage: 1
       }
     );
   },
@@ -97,7 +97,7 @@ export default {
       return [
         {
           flex: 1,
-          values: this.result,
+          values: this.result.list,
           className: "picker-content",
           textAlign: "center"
         }
