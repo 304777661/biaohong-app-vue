@@ -57,12 +57,12 @@
         <i class="iconfont iconwenhao"></i>
       </span>
       <span>
-        <label for="a">{{resultList.insuranceList[0]/100}}马力</label>
-        <input id="a" type="radio" name="mali" v-model="maliNumber" :value="resultList.insuranceList[0]/100">
+        <label for="a">50马力</label>
+        <input id="a" type="radio" name="mali" v-model="maliNumber" value="50">
       </span>
       <span>
-        <label for="b">{{resultList.insuranceList[1]/100}}马力</label>
-        <input id="b" type="radio" name="mali" v-model="maliNumber" :value="resultList.insuranceList[1]/100">
+        <label for="b">20马力</label>
+        <input id="b" type="radio" name="mali" v-model="maliNumber" value="20">
       </span>
     </p>
     <mt-navbar v-model="selected" class="tishi">
@@ -131,6 +131,7 @@ export default {
           : new Date().getDate()),
       popupVisible: false,
       maliNumber: 50,
+      currentTags: null,
       selected: "1",
       coachFee:0,
       pickerCoach: ""
@@ -139,9 +140,11 @@ export default {
   computed: {
     slots() {
       let arrPicker = this.resultList.coachList;
-      arrPicker.forEach(element => {
+      if(arrPicker){
+arrPicker.forEach(element => {
         element.name += "--(" + element.mali/100 + "马力" + ")";
       });
+      }
       return [
         {
           flex: 1,
@@ -184,6 +187,7 @@ export default {
     handleConfirm() {
       this.currentTags = this.$refs.pickerCoach.getValues()[0];
       this.pickerCoach = this.currentTags.name;
+      
       this.coachFee = this.currentTags.fee;
       // console.log(this.currentTags,99)
       this.popupVisible = false;
@@ -203,7 +207,12 @@ export default {
         () => {},
         {
           baseId: this.$route.query.baseId,
-          subscribeDate: this.btnDefauleStart
+          subscribeDate: this.btnDefauleStart,
+          realityFee: this.resultList.realityFee,
+          coachId:this.currentTags.id,
+          coachFee: this.currentTags.mali/100,
+          totalFee:this.sumMali,
+          insuranceFee:this.maliNumber
         },
         this
       );
@@ -215,6 +224,7 @@ export default {
       result => {
         this.resultList = result;
         this.pickerCoach = result.coachList[0].name+"--(" + result.coachList[0].mali/100 + "马力" + ")";
+        this.coachFee = result.coachList[0].mali;
         this.reserveBgImg =
           "background: url('" +
           this.resultList.pic +
