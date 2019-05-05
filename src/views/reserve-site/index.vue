@@ -70,7 +70,6 @@ export default {
       "index/loadBaseList",
       result => {
         this.resultList = result;
-        console.log(this.resultList, 66);
       },
       () => {},
       { AreaID: "" }
@@ -101,6 +100,9 @@ export default {
 
 <style lang="scss" scoped>
 #site-reserve {
+  .mint-popup {
+    width: 100vw;
+  }
   .reserve-list {
     padding: 20px 20px;
     background-color: #f0f1f2;

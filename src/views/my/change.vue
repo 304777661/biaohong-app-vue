@@ -4,7 +4,7 @@
     <ul>
       <li>
         <div>
-          <img src="../../../static/piao-icon.png" alt> &nbsp;邮票&nbsp;&nbsp;
+          <img src="../../../static/piao-icon.png" alt> &nbsp;油票&nbsp;&nbsp;
           <img src="../../../static/sanjiao-xiala.png" alt>
         </div>
         <div>

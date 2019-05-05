@@ -371,7 +371,7 @@ export default {
     margin-top: 30px;
     .mint-tab-item-label {
       color: #333;
-      font-size: 33px;
+      font-size: 70px;
     }
     .is-selected {
       border-bottom-color: #fa3338;

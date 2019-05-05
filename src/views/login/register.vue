@@ -79,7 +79,7 @@ export default {
         },
         function(result) {
           // that.$toast(result.resultMsg);
-        }
+        },{},this
       );
       return false;
     },

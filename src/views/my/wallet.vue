@@ -5,7 +5,7 @@
       <li>
         <div class="piaoma">
           <ul>
-            <li>STAMP 邮票</li>
+            <li>STAMP 油票</li>
             <li>
               <b>1200.210932</b>
             </li>

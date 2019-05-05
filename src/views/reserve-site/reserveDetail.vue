@@ -12,10 +12,10 @@
         <span class="pull-right" style="color: #fa3338;">4.0分</span>
       </p>
       <p class="vipprice">
-        300
+        {{resultList.realityFee/100}}
         <span class="danwei">马力/人</span>
         &nbsp;&nbsp;
-        <mt-badge type="warning" size="large">会员价 50</mt-badge>
+        <mt-badge type="warning" size="large">会员价 {{resultList.vipFee/100}}</mt-badge>
         <i class="iconfont iconxingxing pull-right"></i>
         <i class="iconfont iconxingxing1 pull-right"></i>
         <i class="iconfont iconxingxing1 pull-right"></i>
@@ -27,7 +27,7 @@
       <div>
         <i class="iconfont iconweizhi" style="color: #fa3338"></i>
         &nbsp;
-        长沙市岳麓区岳麓大道110申奥美域15栋
+        {{resultList.addr}}
       </div>
       <img class src="../../../static/rg-arrow.png" alt>
     </div>
@@ -47,7 +47,7 @@
           <button
             @click="selectCoach"
             style="border-color: transparent; color: rgb(250, 51, 56);"
-          >欧阳洋洋 ></button>
+          >{{pickerCoach}} ></button>
         </li>
       </ul>
     </div>
@@ -57,12 +57,12 @@
         <i class="iconfont iconwenhao"></i>
       </span>
       <span>
-        <label for="a">50马力</label>
-        <input id="a" type="radio" name="mali" v-model="maliNumber" value="0">
+        <label for="a">{{resultList.insuranceList[0]/100}}马力</label>
+        <input id="a" type="radio" name="mali" v-model="maliNumber" :value="resultList.insuranceList[0]/100">
       </span>
       <span>
-        <label for="b">20马力</label>
-        <input id="b" type="radio" name="mali" v-model="maliNumber" value="1">
+        <label for="b">{{resultList.insuranceList[1]/100}}马力</label>
+        <input id="b" type="radio" name="mali" v-model="maliNumber" :value="resultList.insuranceList[1]/100">
       </span>
     </p>
     <mt-navbar v-model="selected" class="tishi">
@@ -91,7 +91,7 @@
     </mt-tab-container>
     <div class="dingdan">
       <span>总价：</span>
-      350马力
+      {{sumMali}}马力
       <button class="pull-right" @click="submit">提交订单</button>
     </div>
     <mt-datetime-picker
@@ -105,7 +105,10 @@
       @confirm="handleStart"
     ></mt-datetime-picker>
     <mt-popup v-model="popupVisible" position="bottom" popup-transition="popup-fade">
-      <mt-picker :slots="slots" @change="onValuesChange"></mt-picker>
+      <mt-picker :slots="slots" ref="pickerCoach" value-key="name" :show-toolbar="true">
+        <span class="mint-datetime-action mint-datetime-cancel" @click="handleCancel">取消</span>
+        <span class="mint-datetime-action mint-datetime-confirm" @click="handleConfirm">确认</span>
+      </mt-picker>
     </mt-popup>
   </div>
 </template>
@@ -127,17 +130,31 @@ export default {
           ? "0" + new Date().getDate()
           : new Date().getDate()),
       popupVisible: false,
-      maliNumber: "1",
+      maliNumber: 50,
       selected: "1",
-      slots: [
+      coachFee:0,
+      pickerCoach: ""
+    };
+  },
+  computed: {
+    slots() {
+      let arrPicker = this.resultList.coachList;
+      arrPicker.forEach(element => {
+        element.name += "--(" + element.mali/100 + "马力" + ")";
+      });
+      return [
         {
           flex: 1,
-          values: ["不用教练", "欧阳洋洋", "王大勇"],
+          values: arrPicker,
           className: "picker-content",
           textAlign: "center"
         }
-      ]
-    };
+      ];
+    },
+    sumMali() {
+      let sumFee = this.resultList.realityFee+(+this.maliNumber)*100+this.coachFee;
+      return sumFee/100
+    }
   },
   methods: {
     blackBtn() {
@@ -161,12 +178,23 @@ export default {
     selectCoach() {
       this.popupVisible = true;
     },
+    handleCancel() {
+      this.popupVisible = false;
+    },
+    handleConfirm() {
+      this.currentTags = this.$refs.pickerCoach.getValues()[0];
+      this.pickerCoach = this.currentTags.name;
+      this.coachFee = this.currentTags.fee;
+      // console.log(this.currentTags,99)
+      this.popupVisible = false;
+    },
     onValuesChange(picker, values) {
       console.log(values);
       // this.popupVisible = false;
       // this.$messagebox.alert(values);
     },
     submit() {
+      console.log(this.maliNumber);
       this.myAjax.postData(
         "index/subscribe",
         result => {
@@ -186,12 +214,11 @@ export default {
       "index/getBaseData",
       result => {
         this.resultList = result;
-        // console.log(this.resultList, 56);
+        this.pickerCoach = result.coachList[0].name+"--(" + result.coachList[0].mali/100 + "马力" + ")";
         this.reserveBgImg =
           "background: url('" +
           this.resultList.pic +
           "') no-repeat center center";
-        console.log(result.list, 80);
       },
       () => {},
       { baseId: this.$route.query.baseId }
@@ -289,7 +316,7 @@ export default {
   }
   .tishi {
     margin-top: 30px;
-    .mint-tab-item-label {
+    /deep/ .mint-tab-item-label {
       color: #333;
       font-size: 33px;
     }

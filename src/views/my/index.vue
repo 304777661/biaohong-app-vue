@@ -36,7 +36,7 @@
         @click="pickerBuyType(item)"
       >
         <p v-show="item.cardType==2||item.cardType==3">成为</p>
-        <span v-show="item.cardType==1">体验馆</span>
+        <span v-show="item.cardType==1">体验官</span>
 
         <span v-show="item.cardType==2">
           <font color="#333">

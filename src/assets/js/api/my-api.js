@@ -49,7 +49,7 @@ export default {
                 error();
             });
     },
-    noTokenPost(url, success, error, dataParam = {}) {
+    noTokenPost(url, success, error, dataParam = {}, thisObj = null) {
         axios({
                 url: apiRoot + url,
                 method: 'post',
@@ -61,6 +61,8 @@ export default {
             .then((response) => {
                 if (response.data.resultCode == 0) {
                     success(response.data);
+                } else if (response.data.resultCode == 1) {
+                    thisObj.$toast(response.data.resultMsg);
                 } else {
                     error(response.data);
                 }
