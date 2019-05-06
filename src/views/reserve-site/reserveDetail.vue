@@ -9,18 +9,29 @@
     <div class="guang-name">
       <p>
         {{resultList.shopName}}
-        <span class="pull-right" style="color: #fa3338;">4.0分</span>
+        <span
+          class="pull-right"
+          style="color: #fa3338;"
+        >{{resultList.grade||0}}分</span>
       </p>
       <p class="vipprice">
         {{resultList.realityFee/100}}
         <span class="danwei">马力/人</span>
         &nbsp;&nbsp;
         <mt-badge type="warning" size="large">会员价 {{resultList.vipFee/100}}</mt-badge>
-        <i class="iconfont iconxingxing pull-right"></i>
+        <i
+          class="iconfont iconxingxing pull-right"
+          v-for="(item,index) of 5-resultList.grade"
+          :key="index"
+        ></i>
+        <i
+          class="iconfont iconxingxing1 pull-right"
+          v-for="(item,index) of resultList.grade"
+          :key="index"
+        ></i>
+        <!-- <i class="iconfont iconxingxing1 pull-right"></i>
         <i class="iconfont iconxingxing1 pull-right"></i>
-        <i class="iconfont iconxingxing1 pull-right"></i>
-        <i class="iconfont iconxingxing1 pull-right"></i>
-        <i class="iconfont iconxingxing1 pull-right"></i>
+        <i class="iconfont iconxingxing1 pull-right"></i>-->
       </p>
     </div>
     <div class="my-cell">
@@ -246,6 +257,7 @@ export default {
 <style lang="scss" scoped>
 #reserveDetail {
   background-color: #f0f1f2;
+  padding-bottom: 100px;
   .picker-content {
     width: 100vw;
   }
@@ -361,12 +373,16 @@ export default {
     }
   }
   .dingdan {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
     background-color: #fff;
     height: 100px;
     line-height: 100px;
     color: #fa3338;
     font-size: 33px;
     text-indent: 22px;
+    border-top: 2px solid #fa3338;
     span {
       font-size: 26px;
       color: #fa3338;

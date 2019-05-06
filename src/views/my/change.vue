@@ -15,13 +15,14 @@
           <img src="../../../static/sanjiao-xiala.png" alt>
         </div>
       </li>
-      <li>余额：1200.210932</li>
+      <li>余额：{{result.stampMoney}}</li>
       <li>
-        <b>1120.00</b>
-        <span>≈308.390SOUP</span>
+        <input type="text" placeholder="请输入转换数量(比例为1:1)" v-model="zhuanghuan">
+        &nbsp;&nbsp;
+        <span>= {{zhuanghuan||0}}</span>
       </li>
       <li>
-        <button>转换</button>
+        <button @click="zhuanghuanFun">转换</button>
       </li>
     </ul>
   </div>
@@ -35,10 +36,39 @@ export default {
   },
   data() {
     return {
-      rgUrl: require("../../../static/jilu-back.png")
+      rgUrl: require("../../../static/jilu-back.png"),
+      result: { stampMoney: 0 },
+      zhuanghuan: ""
     };
   },
-  methods: {}
+  methods: {
+    zhuanghuanFun() {
+      if (this.zhuanghuan) {
+        var that = this;
+        this.myAjax.postData(
+          "center/conversion",
+          result => {
+            // this.$toast("操作成功");
+          },
+          () => {},
+          { stampMoney: this.zhuanghuan, mlMoney: this.zhuanghuan },
+          this
+        );
+      } else {
+        this.$toast("请输入转换数量");
+      }
+    }
+  },
+  created() {
+    this.myAjax.postData(
+      "center/getUserMsg",
+      result => {
+        this.result = result;
+      },
+      () => {},
+      {}
+    );
+  }
 };
 </script>
 <style lang="scss" scoped>
@@ -84,11 +114,25 @@ export default {
       margin-top: 80px;
     }
     li:nth-of-type(3) {
-      font-size: 40px;
-      color: #333333;
+      input {
+        &::-webkit-input-placeholder {
+          font-size: 24px;
+        }
+        border: 1px solid #dedede;
+        display: inline-block;
+        height: 70px;
+        line-height: 70px;
+        padding: 0 20px;
+        font-size: 56px;
+        font-weight: 600;
+        font-size: 40px;
+        color: #333333;
+        // flex: 1;
+        width: 300px;
+      }
       margin-top: 48px;
       display: flex;
-      justify-content: space-between;
+      // justify-content: space-between;
       align-items: center;
 
       b {

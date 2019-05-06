@@ -30,11 +30,17 @@
         </div>
         <div>
           <i class="iconfont iconweizhi"></i>距离暂无
-          <i class="iconfont iconxingxing pull-right"></i>
-          <i class="iconfont iconxingxing1 pull-right"></i>
-          <i class="iconfont iconxingxing1 pull-right"></i>
-          <i class="iconfont iconxingxing1 pull-right"></i>
-          <i class="iconfont iconxingxing1 pull-right"></i>
+          <i
+            class="iconfont iconxingxing pull-right"
+            v-for="(item,index) of 5-item.grade"
+            :key="index"
+          ></i>
+          <i
+            class="iconfont iconxingxing1 pull-right"
+            v-for="(item,index) of item.grade"
+            :key="index"
+          ></i>
+          <!-- <i class="iconfont iconxingxing1 pull-right"></i> -->
         </div>
       </li>
     </ul>

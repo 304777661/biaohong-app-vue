@@ -10,15 +10,16 @@
       </li>
       <li>提现额度</li>
       <li>
-        <b>620.00</b>
-        <span>≈116.390CNY</span>
+        <input type="text" placeholder="请输入提现金额/元(比例为1:0.9)" v-model="meneyTotal">
+        &nbsp;&nbsp;
+        <span>= {{this.tixianRMB||0}}元</span>
       </li>
       <li>
-        <span>账户额度：1200.210932</span>
-        <span>全部提现</span>
+        <span>账户额度：{{result.stampMoney}}</span>
+        <span @click="allTixian">全部提现</span>
       </li>
       <li>
-        <button>提现</button>
+        <button @click="submit">提现</button>
       </li>
     </ul>
   </div>
@@ -32,10 +33,42 @@ export default {
   },
   data() {
     return {
-      rgUrl: require("../../../static/jilu-back.png")
+      rgUrl: require("../../../static/jilu-back.png"),
+      result: null,
+      meneyTotal: ""
     };
   },
-  methods: {}
+  computed: {
+    tixianRMB() {
+      return this.meneyTotal * 0.9;
+    }
+  },
+  methods: {
+    allTixian() {
+      this.meneyTotal = this.result.stampMoney;
+    },
+    submit() {
+      this.myAjax.postData(
+        "center/withdraw",
+        result => {
+          this.result = result;
+        },
+        () => {},
+        { stampMoney: this.meneyTotal, withdrawMoney: this.tixianRMB },
+        this
+      );
+    }
+  },
+  created() {
+    this.myAjax.postData(
+      "center/getUserMsg",
+      result => {
+        this.result = result;
+      },
+      () => {},
+      {}
+    );
+  }
 };
 </script>
 <style lang="scss" scoped>
@@ -67,11 +100,24 @@ export default {
       margin-top: 80px;
     }
     li:nth-of-type(3) {
-      font-size: 40px;
-      color: #333333;
+      input {
+        &::-webkit-input-placeholder {
+          font-size: 24px;
+        }
+        border: 1px solid #dedede;
+        display: inline-block;
+        height: 70px;
+        line-height: 70px;
+        padding: 0 20px;
+        font-size: 56px;
+        font-weight: 600;
+        font-size: 40px;
+        color: #333333;
+        // flex: 1;
+        width: 400px;
+      }
       margin-top: 48px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
 
       b {

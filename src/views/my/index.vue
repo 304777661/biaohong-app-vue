@@ -35,9 +35,13 @@
         :data-id="item.cardNo"
         @click="pickerBuyType(item)"
       >
-        <p v-show="item.cardType==2||item.cardType==3">成为</p>
-        <span v-show="item.cardType==1">体验官</span>
-
+        <p v-show="item.cardType==1||item.cardType==2||item.cardType==3">成为</p>
+        <!-- <span v-show="item.cardType==1">体验官</span> -->
+        <span v-show="item.cardType==1">
+          <font color="#333">
+            <b>体验官</b>
+          </font>
+        </span>
         <span v-show="item.cardType==2">
           <font color="#333">
             <b>修路人</b>
@@ -199,10 +203,20 @@ export default {
           );
         }
         if (arg.cardType == 2) {
-          this.$router.push("/becomeXLR/" + arg.id);
+          if (this.result.mlMoney >= arg.price) {
+            this.$router.push("/becomeXLR/" + arg.id);
+          } else {
+            this.$toast("余额不足,请先充值");
+            this.$router.push("/recharge");
+          }
         }
         if (arg.cardType == 3) {
-          this.$router.push("/becomeDZ/" + arg.id);
+          if (this.result.mlMoney >= arg.price) {
+            this.$router.push("/becomeDZ/" + arg.id);
+          } else {
+            this.$toast("余额不足,请先充值");
+            this.$router.push("/recharge");
+          }
         }
       }
     },

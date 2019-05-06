@@ -32,6 +32,9 @@ export default {
                 console.log(response.data, ajaxNumber++);
                 if (response.data.resultCode == 0) {
                     success(response.data.resultData);
+                    if (response.data.resultMsg) {
+                        thisObj.$toast(response.data.resultMsg);
+                    }
                 } else if (response.data.resultCode == 5) {
                     thisObj.$toast(response.data.resultMsg);
                     success(response.data.resultData);

@@ -7,9 +7,9 @@
           <ul>
             <li>STAMP 油票</li>
             <li>
-              <b>1200.210932</b>
+              <b>{{result.stampMoney}}</b>
             </li>
-            <li>≈316.390CNY</li>
+            <li>1油票 = 0.9元</li>
           </ul>
           <img src="../../../static/piao-icon.png" alt>
         </div>
@@ -24,10 +24,10 @@
           <ul>
             <li>SOUP 马力</li>
             <li>
-              <b>1200.210932</b>
+              <b>{{result.mlMoney}}</b>
             </li>
-            <li>≈316.390CNY</li>
-            <li>期权股：0.52%</li>
+            <!-- <li>≈316.390CNY</li>
+            <li>期权股：0.52%</li>-->
           </ul>
           <img src="../../../static/mali-icon.png" alt>
         </div>
@@ -49,7 +49,8 @@ export default {
   },
   data() {
     return {
-      rgUrl: require("../../../static/jilu.png")
+      rgUrl: require("../../../static/jilu.png"),
+      result: null
     };
   },
   methods: {
@@ -62,6 +63,16 @@ export default {
     change(arg = "") {
       this.$router.push(`/change?id=${arg}`);
     }
+  },
+  created() {
+    this.myAjax.postData(
+      "center/getUserMsg",
+      result => {
+        this.result = result;
+      },
+      () => {},
+      {}
+    );
   }
 };
 </script>

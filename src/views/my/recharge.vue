@@ -11,10 +11,11 @@
       <li>充值额度</li>
       <li>
         ￥
-        <b>1120.00</b>
+        <input type="text" placeholder="请输入充值金额(元)" v-model="rechargeRMB">
+        <!-- <b>1120.00</b> -->
       </li>
       <li>
-        <button>充值</button>
+        <button @click="rechargeWechat">充值</button>
       </li>
     </ul>
   </div>
@@ -28,10 +29,49 @@ export default {
   },
   data() {
     return {
-      rgUrl: require("../../../static/jilu-back.png")
+      rgUrl: require("../../../static/jilu-back.png"),
+      rechargeRMB: ""
     };
   },
-  methods: {}
+  methods: {
+    rechargeWechat() {
+      this.myAjax.postData(
+        "settle/weixinPay",
+        result => {
+          this.result = result;
+          console.log("发送支付的值：" + JSON.stringify(result));
+          console.log("发送支付类型：", wxChannel);
+          plus.payment.request(
+            wxChannel,
+            {
+              appid: result.appId,
+              noncestr: result.nonceStr,
+              package: result.package,
+              partnerid: result.partnerid,
+              prepayid: result.prepayId,
+              timestamp: +result.timeStamp,
+              sign: result.paySign
+            },
+            () => {
+              alert("支付成功");
+            },
+            error => {
+              alert("支付失败:" + JSON.stringify(error));
+            }
+          );
+        },
+        () => {},
+        {
+          fee: this.rechargeRMB,
+          // token: localStorage.token,
+          // cardId: arg.id,
+          body: "标题1",
+          subject: "标题2"
+        },
+        this
+      );
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>
@@ -63,8 +103,20 @@ export default {
       margin-top: 80px;
     }
     li:nth-of-type(3) {
-      font-size: 40px;
-      color: #333333;
+      input {
+        display: inline-block;
+        height: 70px;
+        line-height: 70px;
+        padding: 0 20px;
+        font-size: 56px;
+        font-weight: 600;
+        font-size: 40px;
+        color: #333333;
+
+        &::-webkit-input-placeholder {
+          font-size: 24px;
+        }
+      }
       margin-top: 48px;
       b {
         font-size: 56px;
