@@ -17,15 +17,11 @@
         </div>
       </div>
       <div class="level-star">
-        <p>{{result.uplevel}}星</p>
+        <!-- <p>{{result.uplevel}}星</p> -->
         <p v-show="result.uplevel==0">普通会员</p>
-        <p v-show="result.uplevel==1">VIP会员</p>
-        <p v-show="result.uplevel==2">一星会员</p>
-        <p v-show="result.uplevel==3">二星会员</p>
-        <p v-show="result.uplevel==4">三星会员</p>
-        <p v-show="result.uplevel==5">四星会员</p>
-        <p v-show="result.uplevel==6">五星会员</p>
-        <p v-show="result.uplevel==100">创始会员</p>
+        <p v-show="result.uplevel>0&&result.uplevel<100">体验官</p>
+        <p v-show="result.uplevel>=100&&result.uplevel<1000">修路人</p>
+        <p v-show="result.uplevel==1000">段长</p>
       </div>
     </div>
     <div class="geren-type">
@@ -35,7 +31,8 @@
         :data-id="item.cardNo"
         @click="pickerBuyType(item)"
       >
-        <p v-show="item.cardType==1||item.cardType==2||item.cardType==3">成为</p>
+        <p v-show="result.uplevel<item.cardType">成为</p>
+        <p v-show="result.uplevel>=item.cardType">已是</p>
         <!-- <span v-show="item.cardType==1">体验官</span> -->
         <span v-show="item.cardType==1">
           <font color="#333">

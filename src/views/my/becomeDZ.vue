@@ -131,6 +131,7 @@ export default {
     span:nth-of-type(1) {
       position: absolute;
       right: 0;
+      top: 0;
       font-size: 29px;
       color: #999999;
       padding-right: 34px;

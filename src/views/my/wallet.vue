@@ -7,7 +7,7 @@
           <ul>
             <li>STAMP 油票</li>
             <li>
-              <b>{{result.stampMoney}}</b>
+              <b>{{result.stampMoney/100}}</b>
             </li>
             <li>1油票 = 0.9元</li>
           </ul>
@@ -24,7 +24,7 @@
           <ul>
             <li>SOUP 马力</li>
             <li>
-              <b>{{result.mlMoney}}</b>
+              <b>{{result.mlMoney/100}}</b>
             </li>
             <!-- <li>≈316.390CNY</li>
             <li>期权股：0.52%</li>-->
