@@ -8,7 +8,7 @@ import router from '../../../router'
 
 Vue.use(VueAxios, axios)
     // const testApi = 'Biaohong/';
-    // const apiRoot = 'http://192.168.10.79:8080/Biaohong/';
+    // const apiRoot = 'http://192.168.0.199:8080/Biaohong/';
 const apiRoot = 'http://app.bh8341.com/';
 let ajaxNumber = 1;
 // let _this = this;
@@ -32,12 +32,8 @@ export default {
                 console.log(response.data, ajaxNumber++);
                 if (response.data.resultCode == 0) {
                     success(response.data.resultData);
-                    if (response.data.resultMsg) {
-                        thisObj.$toast(response.data.resultMsg);
-                    }
                 } else if (response.data.resultCode == 5) {
                     thisObj.$toast(response.data.resultMsg);
-                    success(response.data.resultData);
                 } else if (response.data.resultCode == 1) {
                     thisObj.$toast(response.data.resultMsg);
                 } else if (response.data.resultCode == 1000) {
@@ -53,7 +49,7 @@ export default {
                 error();
             });
     },
-    noTokenPost(url, success, error, dataParam = {}, thisObj = null) {
+    noTokenPost(url, success, error, dataParam = {}) {
         axios({
                 url: apiRoot + url,
                 method: 'post',
@@ -65,8 +61,6 @@ export default {
             .then((response) => {
                 if (response.data.resultCode == 0) {
                     success(response.data);
-                } else if (response.data.resultCode == 1) {
-                    thisObj.$toast(response.data.resultMsg);
                 } else {
                     error(response.data);
                 }
