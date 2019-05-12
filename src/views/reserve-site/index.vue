@@ -26,10 +26,11 @@
         </div>
         <div>
           {{item.shopName}}
-          <button class="pull-right" @click="reserveDetail('103')">立即预约</button>
+          <button class="pull-right" @click="reserveDetail(item.shopId)">立即预约</button>
         </div>
         <div>
-          <i class="iconfont iconweizhi"></i>距离暂无
+          <i class="iconfont iconweizhi"></i>
+          {{item.addr}}
           <i
             class="iconfont iconxingxing pull-right"
             v-for="(item,index) of 5-item.grade"

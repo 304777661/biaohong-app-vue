@@ -124,12 +124,12 @@ export default new Router({
             component: Change
         },
         {
-            path: '/selfInfor/:id',
+            path: '/selfInfor/:id/:price',
             name: 'selfInfor',
             component: SelfInfor
         },
         {
-            path: '/becomeDZ/:id',
+            path: '/becomeDZ/:id/:price',
             name: 'becomeDZ',
             component: BecomeDZ
         },

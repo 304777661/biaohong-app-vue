@@ -3,7 +3,8 @@
     <headerpage :title_page="title_page='详情'" :backBtn="backBtn=1"></headerpage>
     <div class="aboutNews">
       <h4>{{aboutNewsDetail.news_title}}</h4>
-      <p>{{aboutNewsDetail.describe}}</p>
+      <p v-html="aboutNewsDetail.content"></p>
+      <img style="width:100%;" :src="aboutNewsDetail.mediaUrl" alt>
       <div>{{aboutNewsDetail.author}}</div>
     </div>
   </div>

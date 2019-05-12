@@ -13,7 +13,7 @@
         </div>
         <div>
           <p>{{result.userName||"暂无"}}</p>
-          <p>ID：{{result.userId}}</p>
+          <p>ID：{{result.mobile}}</p>
         </div>
       </div>
       <div class="level-star">
@@ -31,8 +31,8 @@
         :data-id="item.cardNo"
         @click="pickerBuyType(item)"
       >
-        <p v-show="result.uplevel<item.cardType">成为</p>
-        <p v-show="result.uplevel>=item.cardType">已是</p>
+        <p v-show="result.usertype<item.cardType">成为</p>
+        <p v-show="result.usertype>=item.cardType">已是</p>
         <!-- <span v-show="item.cardType==1">体验官</span> -->
         <span v-show="item.cardType==1">
           <font color="#333">
@@ -189,19 +189,24 @@ export default {
         // this.levelren = arg.cardType - 1;
         // this.popupVisible = true;
         if (arg.cardType == 1) {
-          this.myAjax.postData(
-            "settle/payCard",
-            result => {
-              this.$router.push("/recharge");
-            },
-            () => {},
-            { cardId: arg.id, affiliation: 0 },
-            this
-          );
+          this.$messagebox
+            .confirm(
+              "购买成为体验官(" + this.vipCardList[0].price / 100 + ")",
+              "提示"
+            )
+            .then(action => {
+              this.myAjax.postData(
+                "settle/payCard",
+                result => {},
+                () => {},
+                { cardId: arg.id, affiliation: 0 },
+                this
+              );
+            });
         }
         if (arg.cardType == 2) {
           if (this.result.mlMoney >= arg.price) {
-            this.$router.push("/becomeXLR/" + arg.id);
+            this.$router.push("/becomeXLR/" + arg.id + "/" + arg.price / 100);
           } else {
             this.$toast("余额不足,请先充值");
             this.$router.push("/recharge");
@@ -209,7 +214,7 @@ export default {
         }
         if (arg.cardType == 3) {
           if (this.result.mlMoney >= arg.price) {
-            this.$router.push("/becomeDZ/" + arg.id);
+            this.$router.push("/becomeDZ/" + arg.id + "/" + arg.price / 100);
           } else {
             this.$toast("余额不足,请先充值");
             this.$router.push("/recharge");

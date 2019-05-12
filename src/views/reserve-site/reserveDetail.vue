@@ -84,21 +84,24 @@
       <mt-tab-container-item id="1">
         <ul class="wenxts">
           <li>
-            <em>●&nbsp;&nbsp;</em>您的会员类型为：体验馆
+            <em>●&nbsp;&nbsp;</em>您的会员类型为：体验官
           </li>
           <li>
-            <em>●&nbsp;&nbsp;</em>体验剩余次数为：
-            <em>5次</em>
+            <em>●&nbsp;&nbsp;</em>体验次数为：
+            <em>暂无</em>
           </li>
           <li>
-            <em>●&nbsp;&nbsp;</em>体验馆开放时间为：全天
+            <em>●&nbsp;&nbsp;</em>
+            基地开放开放时间为：{{resultList.BusinessTime}}
           </li>
           <li>
-            <em>●&nbsp;&nbsp;</em>体验馆每张会员卡同时间段限制预约1次
+            <em>●&nbsp;&nbsp;</em>每张会员卡同时间段限制预约1次
           </li>
         </ul>
       </mt-tab-container-item>
-      <mt-tab-container-item id="2">暂无</mt-tab-container-item>
+      <mt-tab-container-item id="2">
+        <div class="about-text">{{resultList.about}}</div>
+      </mt-tab-container-item>
     </mt-tab-container>
     <div class="dingdan">
       <span>总价：</span>
@@ -185,10 +188,10 @@ export default {
       value = new Date(value);
       this.btnDefauleStart =
         value.getFullYear() +
-        (value.getMonth() < 9
+        (value.getMonth() < 10
           ? "0" + (value.getMonth() + 1)
           : value.getMonth() + 1) +
-        (value.getDate() < 9 ? "0" + value.getDate() : value.getDate());
+        (value.getDate() < 10 ? "0" + value.getDate() : value.getDate());
     },
     selectCoach() {
       this.popupVisible = true;
@@ -371,6 +374,12 @@ export default {
         color: rgb(250, 51, 56);
       }
     }
+  }
+  .about-text {
+    margin: 5px 0;
+    padding: 0 35px;
+    font-size: 26px;
+    color: #333333;
   }
   .dingdan {
     position: fixed;

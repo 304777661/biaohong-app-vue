@@ -15,7 +15,7 @@
         <span>= {{this.tixianRMB||0}}元</span>
       </li>
       <li>
-        <span>账户额度：{{result.stampMoney}}</span>
+        <span>账户额度：{{result.stampMoney/100}}</span>
         <span @click="allTixian">全部提现</span>
       </li>
       <li>

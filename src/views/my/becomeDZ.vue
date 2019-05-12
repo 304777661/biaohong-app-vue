@@ -17,7 +17,7 @@
       </li>
       <li>支付额度</li>
       <li>
-        <b>￥1000.00</b>
+        <b>￥{{$route.params.price}}</b>
       </li>
       <li>
         <button @click="submit">立即支付</button>
@@ -65,7 +65,7 @@ export default {
       this.myAjax.postData(
         "settle/payCard",
         result => {
-          this.$router.push("/recharge");
+          this.$router.push("/my");
         },
         () => {},
         {

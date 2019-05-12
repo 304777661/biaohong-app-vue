@@ -33,8 +33,8 @@
         </div>
         <div class="tizhuang">
           <span @click="recharge">充值</span>
-          <span>｜</span>
-          <span @click="change">转换</span>
+          <!-- <span>｜</span>
+          <span @click="change">转换</span>-->
         </div>
       </li>
     </ul>
